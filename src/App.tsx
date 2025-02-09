@@ -1,5 +1,6 @@
 import { Grid, GridItem, Show } from "@chakra-ui/react";
 import NavBar from "./components/NavBar";
+import PokemonGuessInput from "./components/PokemonGuessInput";
 
 const App = () => {
   return (
@@ -14,8 +15,8 @@ const App = () => {
           aside
         </GridItem>
       </Show>
-      <GridItem area={"main"} bg={"blue"}>
-        Main
+      <GridItem area={"main"}>
+        <PokemonGuessInput />
       </GridItem>
     </Grid>
   );
