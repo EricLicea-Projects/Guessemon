@@ -12,7 +12,7 @@ const ColorModeSwitch = () => {
       aria-label={`Switch to ${isDark ? "light" : "dark"} mode`}
       size={"md"}
       fontSize={"30px"}
-      variant="ghost"
+      variant="outline"
       onClick={toggleColorMode}
       icon={isDark ? <FaSun /> : <FaMoon />}
     />
