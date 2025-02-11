@@ -1,28 +1,33 @@
 import {
-  Button,
   Image,
   Input,
   InputGroup,
   InputLeftElement,
   InputRightElement,
 } from "@chakra-ui/react";
+import { useState } from "react";
+
 import question from "../assets/question.png";
+import ClearInputButton from "./ClearInputButton";
 
 const PokemonGuessInput = () => {
+  const [guess, setGuess] = useState("");
+
+  const handleSubmit = (event: React.FormEvent) => {
+    event.preventDefault();
+    console.log("User Guess: ", guess);
+  };
+
   return (
-    <form
-      onSubmit={(event) => {
-        event.preventDefault();
-      }}
-    >
+    <form onSubmit={handleSubmit}>
       <InputGroup size="lg" width="300px">
         <InputLeftElement
           pointerEvents="none"
           top="50%"
-          left="1px" // Moves the icon 10px to the right
+          left="1px"
           transform="translateY(-50%)"
         >
-          <Image boxSize="40px" src={question} />
+          <Image boxSize="40px" src={question} alt="Pokeball Icon" />
         </InputLeftElement>
         <Input
           placeholder="Guess a Pokemon"
@@ -30,21 +35,11 @@ const PokemonGuessInput = () => {
           variant="filled"
           borderRadius={20}
           size="lg"
+          value={guess}
+          onChange={(event) => setGuess(event.target.value)}
         />
-        <InputRightElement width="4.5rem">
-          <Button
-            colorScheme="teal"
-            variant="outline"
-            size="sm"
-            borderRadius="full"
-            h="3rem"
-            w="5rem"
-            onClick={() => {
-              // Optional: handle click here if needed
-            }}
-          >
-            Guess
-          </Button>
+        <InputRightElement>
+          <ClearInputButton onClear={() => setGuess("")} />
         </InputRightElement>
       </InputGroup>
     </form>

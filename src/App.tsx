@@ -6,8 +6,7 @@ const App = () => {
   return (
     <Grid
       templateAreas={{ base: `"nav" "main"`, lg: `"nav nav" "aside main"` }}
-      templateRows={{ base: "100px auto", lg: "100px auto" }}
-      minH="100vh"
+      templateColumns={{ base: "1fr", lg: "200px 1fr" }}
     >
       <GridItem area={"nav"} height="100px">
         <NavBar />
@@ -19,9 +18,9 @@ const App = () => {
       </Show>
       <GridItem
         area={"main"}
-        display={"flex"}
-        justifyContent={"center"}
-        alignItems={"center"}
+        display="flex"
+        justifyContent="center"
+        alignItems="center"
       >
         <PokemonGuessInput />
       </GridItem>
