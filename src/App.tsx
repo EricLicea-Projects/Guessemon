@@ -12,8 +12,8 @@ const App = () => {
         <NavBar />
       </GridItem>
       <Show above="lg">
-        <GridItem area={"aside"} bg={"gold"}>
-          aside
+        <GridItem area={"aside"} bg={"teal.700"}>
+          To Do Navigation
         </GridItem>
       </Show>
       <GridItem

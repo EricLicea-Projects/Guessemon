@@ -1,4 +1,5 @@
 import {
+  Box,
   Image,
   Input,
   InputGroup,
@@ -10,25 +11,26 @@ import { useState } from "react";
 import question from "../assets/question.png";
 import ClearInputButton from "./ClearInputButton";
 import AutoCompleteList from "./AutoCompleteList";
-import { Pokemon, pokemonList } from "@/data/pokemonData";
+import { pokemonList, Pokemon } from "@/data/pokemonData";
+import useSendGuess from "@/hooks/useSendGuess";
 
 const PokemonGuessInput = () => {
-  const [guess, setGuess] = useState("");
+  const [guess, setGuess] = useState<string>("");
+  const { sendGuess, error } = useSendGuess();
 
-  const handleSubmit = (event: React.FormEvent) => {
-    event.preventDefault();
-    console.log("User Guess: ", guess);
-  };
-
-  const handleSelectSuggestion = (selected: Pokemon) => {
+  // This function will be called when the user clicks on a Pokémon from the autocomplete list.
+  const handleSelection = async (selected: Pokemon) => {
+    // Optionally update the input with the selected Pokemon's name:
     setGuess(selected.name);
+
+    // Immediately send the guess using the Pokémon id.
+    console.log("User selected Pokemon ID:", selected.id);
+    const result = await sendGuess(selected.id);
+    console.log("Backend response:", result);
   };
 
   return (
-    <form
-      onSubmit={handleSubmit}
-      style={{ position: "relative", width: "300px" }}
-    >
+    <Box position="relative" width="300px">
       <InputGroup size="lg">
         <InputLeftElement
           pointerEvents="none"
@@ -59,9 +61,10 @@ const PokemonGuessInput = () => {
       <AutoCompleteList
         guess={guess}
         data={pokemonList}
-        onSelect={handleSelectSuggestion}
+        onSelect={handleSelection}
       />
-    </form>
+      {error && <p style={{ color: "red" }}>Error sending guess!</p>}
+    </Box>
   );
 };
 
