@@ -3,21 +3,15 @@ import { CloseIcon } from "@chakra-ui/icons";
 
 interface ClearInputButtonProps {
   onClear: () => void;
-  size?: string;
-  colorScheme?: string;
 }
 
-const ClearInputButton = ({
-  onClear,
-  size = "xs",
-  colorScheme = "teal",
-}: ClearInputButtonProps) => {
+const ClearInputButton = ({ onClear }: ClearInputButtonProps) => {
   return (
     <IconButton
       isRound={true}
       variant="ghost"
-      colorScheme={colorScheme}
-      size={size}
+      size="sm"
+      colorScheme="orange"
       aria-label="Clear Input"
       icon={<CloseIcon />}
       onClick={onClear}

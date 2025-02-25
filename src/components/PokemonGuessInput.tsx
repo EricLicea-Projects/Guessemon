@@ -45,14 +45,19 @@ const PokemonGuessInput = () => {
           <Image boxSize="40px" src={question} alt="Pokeball Icon" />
         </InputLeftElement>
         <Input
-          textAlign="center"
-          color="teal.300"
+          bg="custom.secondary"
+          color="custom.primary"
           fontSize="md"
+          textAlign="center"
           fontFamily='"Press Start 2P", cursive'
           placeholder="Guess"
-          _placeholder={{ color: "teal.700" }}
-          focusBorderColor="teal.500"
+          _placeholder={{ color: "custom.primary", opacity: 0.8 }}
           variant="filled"
+          _hover={{ bg: "custom.secondaryLight" }}
+          _focus={{
+            bg: "custom.secondaryLight",
+            borderColor: "custom.accent",
+          }}
           borderRadius="md"
           size="lg"
           value={guess}
@@ -67,7 +72,6 @@ const PokemonGuessInput = () => {
           onSelect={handleSelection}
         />
       </InputGroup>
-      <HintCard />
     </Box>
   );
 };

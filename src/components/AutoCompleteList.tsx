@@ -20,14 +20,14 @@ const AutoCompleteList = ({ guess, data, onSelect }: Props) => {
 
   return (
     <Box
-      bg="tomato"
+      bg="custom.secondary"
       position="absolute"
       top="100%"
       left="0"
       right="0"
       zIndex="1000"
       borderRadius="md"
-      boxShadow="md"
+      boxShadow="lg"
       maxH="200px"
       overflowY="auto"
     >
@@ -37,7 +37,7 @@ const AutoCompleteList = ({ guess, data, onSelect }: Props) => {
             key={pokemon.id}
             p={2}
             borderRadius="md"
-            _hover={{ bg: "gray.700", cursor: "pointer" }}
+            _hover={{ bg: "custom.secondaryLight", cursor: "pointer" }}
             onClick={() => onSelect(pokemon)}
             spacing={0}
           >
@@ -47,7 +47,7 @@ const AutoCompleteList = ({ guess, data, onSelect }: Props) => {
               alt={pokemon.name}
             />
             <Text
-              color="teal.200"
+              color="custom.primary"
               fontSize="lg"
               fontFamily='"Press Start 2P", cursive'
             >
