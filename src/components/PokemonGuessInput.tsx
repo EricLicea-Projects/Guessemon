@@ -1,16 +1,20 @@
 import {
   Box,
+  HStack,
   Image,
   Input,
   InputGroup,
   InputLeftElement,
   InputRightElement,
+  VStack,
 } from "@chakra-ui/react";
 import { useState } from "react";
 
 import question from "../assets/question.png";
 import ClearInputButton from "./ClearInputButton";
 import AutoCompleteList from "./AutoCompleteList";
+import HintCard from "./HintCard";
+
 import { pokemonList, Pokemon } from "@/data/pokemonData";
 import useSendGuess from "@/hooks/useSendGuess";
 
@@ -31,7 +35,7 @@ const PokemonGuessInput = () => {
 
   return (
     <Box position="relative" width="300px">
-      <InputGroup size="lg">
+      <InputGroup size="lg" zIndex="1" mb={5}>
         <InputLeftElement
           pointerEvents="none"
           top="50%"
@@ -57,13 +61,13 @@ const PokemonGuessInput = () => {
         <InputRightElement>
           {guess && <ClearInputButton onClear={() => setGuess("")} />}
         </InputRightElement>
+        <AutoCompleteList
+          guess={guess}
+          data={pokemonList}
+          onSelect={handleSelection}
+        />
       </InputGroup>
-      <AutoCompleteList
-        guess={guess}
-        data={pokemonList}
-        onSelect={handleSelection}
-      />
-      {error && <p style={{ color: "red" }}>Error sending guess!</p>}
+      <HintCard />
     </Box>
   );
 };

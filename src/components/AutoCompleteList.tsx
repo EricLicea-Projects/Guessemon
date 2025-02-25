@@ -20,11 +20,12 @@ const AutoCompleteList = ({ guess, data, onSelect }: Props) => {
 
   return (
     <Box
+      bg="tomato"
       position="absolute"
       top="100%"
       left="0"
       right="0"
-      zIndex="1"
+      zIndex="1000"
       borderRadius="md"
       boxShadow="md"
       maxH="200px"
