@@ -17,7 +17,7 @@ interface TypesHint {
 interface Hints {
   types: TypesHint;
   color: AttributeHint;
-  habitat: AttributeHint;
+  generation: AttributeHint;
   shape: AttributeHint;
   height: string;
   weight: string;
