@@ -1,7 +1,7 @@
 import { useState } from "react";
 import apiClient from "@/services/api-client";
 
-interface AttributeHint {
+export interface AttributeHint {
   is_correct: boolean;
   guess: string;
 }

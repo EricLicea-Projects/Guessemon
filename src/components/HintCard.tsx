@@ -2,6 +2,7 @@ import { Box, Divider, HStack, Image, Text, VStack } from "@chakra-ui/react";
 
 import { Hints } from "@/hooks/useSendGuess";
 import HintCardTypes from "./HintCardTypes";
+import HintCardAttribute from "./HintCardAttribute";
 
 interface HintCardProps {
   hints: Hints;
@@ -11,17 +12,12 @@ const HintCard = ({ hints }: HintCardProps) => {
   const { id, types, shape, color, generation, height, weight } = hints;
 
   const pokemonImg = `/assets/pokemon/${id}.png`;
-  const shapeImg = "/assets/shapes/upright.png";
-
-  const isCorrect = false;
-
-  const bgColor = isCorrect ? "rgb(0, 134, 0)" : "rgb(148, 0, 0)";
 
   return (
     <VStack
       width={{ base: "95%", md: "500px" }}
-      bg="custom.secondary"
-      border="5px double"
+      bgGradient="linear(to-t, custom.secondaryLight 20%,rgb(61, 61, 61))"
+      border="4px double"
       borderColor="custom.accentDark"
       borderRadius="sm"
       boxShadow="5px 10px 20px rgba(0, 0, 0, 0.7)"
@@ -36,64 +32,24 @@ const HintCard = ({ hints }: HintCardProps) => {
         <VStack flexGrow={1}>
           <HintCardTypes types={types} />
           <HStack justify="space-around" width="100%">
-            <VStack gap={1}>
-              <Text
-                color="custom.primary"
-                fontSize="xs"
-                fontFamily='"Press Start 2P", cursive'
-              >
-                Shape
-              </Text>
-              <Box
-                bg={bgColor}
-                border="1px solid"
-                borderColor={bgColor}
-                borderRadius="md"
-                boxSize="40px"
-              >
-                <Image src={shapeImg} alt="Pokemon Shape" objectFit="contain" />
-              </Box>
-            </VStack>
-            <VStack gap={1}>
-              <Text
-                color="custom.primary"
-                fontSize="xs"
-                fontFamily='"Press Start 2P", cursive'
-              >
-                Color
-              </Text>
-              <Box
-                bg="blue"
-                border="2px solid"
-                borderColor={bgColor}
-                borderRadius="md"
-                boxSize="40px"
-              ></Box>
-            </VStack>
-            <VStack gap={1}>
-              <Text
-                color="custom.primary"
-                fontSize="xs"
-                fontFamily='"Press Start 2P", cursive'
-              >
-                Gen
-              </Text>
-              <Box
-                bg={bgColor}
-                border="1px solid"
-                borderColor={bgColor}
-                borderRadius="md"
-                boxSize="40px"
-              >
-                <Text
-                  color="custom.primary"
-                  fontSize="xs"
-                  fontFamily='"Press Start 2P", cursive'
-                >
-                  1
-                </Text>
-              </Box>
-            </VStack>
+            <HintCardAttribute
+              attribute={shape}
+              name="Shape"
+              hasImg={true}
+              hasText={false}
+            />
+            <HintCardAttribute
+              attribute={color}
+              name="Color"
+              hasImg={false}
+              hasText={false}
+            />
+            <HintCardAttribute
+              attribute={generation}
+              name="Gen"
+              hasImg={false}
+              hasText={true}
+            />
           </HStack>
         </VStack>
       </HStack>

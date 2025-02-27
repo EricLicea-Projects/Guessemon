@@ -13,11 +13,20 @@ const colors = {
     secondaryLight: "#2b2b2b",
     accent: "#a978ff",
     accentDark: "#5e4c3e",
+    correct: "#84ff00",
+    wrong: "#ff2e6d",
   },
-  buttonPrimary: {
-    500: "#dad2af",
-    600: "#dbd2a7",
-    700: "#d6cb9a",
+  hintColor: {
+    black: "#121212",
+    blue: "#0008a1",
+    brown: "#452d14",
+    gray: "#575757",
+    green: "#00700d",
+    pink: "#ffaddd",
+    purple: "#6d0075",
+    red: "#570000",
+    white: "#ffffff",
+    yellow: "#ffe600",
   },
 };
 
