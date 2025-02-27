@@ -1,8 +1,9 @@
-import { Box, Divider, HStack, Image, Text, VStack } from "@chakra-ui/react";
+import { Divider, HStack, Image, VStack } from "@chakra-ui/react";
 
 import { Hints } from "@/hooks/useSendGuess";
 import HintCardTypes from "./HintCardTypes";
 import HintCardAttribute from "./HintCardAttribute";
+import HintCardText from "./HintCardText";
 
 interface HintCardProps {
   hints: Hints;
@@ -57,15 +58,9 @@ const HintCard = ({ hints }: HintCardProps) => {
         borderColor="custom.accentDark"
         borderWidth="1px"
         orientation="horizontal"
-        my={1} // adds vertical margin
+        my={0}
       />
-      <Text
-        color="custom.primary"
-        fontSize="xs"
-        fontFamily='"Press Start 2P", cursive'
-      >
-        Blastoise is heavier and taller.
-      </Text>
+      <HintCardText id={id} height={height} weight={weight} />
     </VStack>
   );
 };
