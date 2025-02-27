@@ -1,6 +1,6 @@
 import { Grid, GridItem, Show } from "@chakra-ui/react";
 import NavBar from "./components/NavBar";
-import PokemonGuessInput from "./components/PokemonGuessInput";
+import PokemonGuessInput from "./components/GuessingGame";
 
 const App = () => {
   return (

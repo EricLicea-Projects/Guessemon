@@ -6,7 +6,7 @@ interface AttributeHint {
   guess: string;
 }
 
-interface TypesHint {
+export interface TypesHint {
   shared: string[];
   guess: string[];
   guess_single: boolean;
@@ -14,7 +14,8 @@ interface TypesHint {
   both_single: boolean;
 }
 
-interface Hints {
+export interface Hints {
+  id: number;
   types: TypesHint;
   color: AttributeHint;
   generation: AttributeHint;
@@ -23,9 +24,9 @@ interface Hints {
   weight: string;
 }
 
-interface PokemonResponse {
+export interface PokemonResponse {
   correct: boolean;
-  hints?: Hints;
+  hints: Hints;
 }
 
 const useSendGuess = () => {

@@ -1,55 +1,40 @@
 import { Box, Divider, HStack, Image, Text, VStack } from "@chakra-ui/react";
 
-const HintCard = () => {
-  const imageURL = `/assets/pokemon/9.png`;
-  const typeOne = "/assets/types/normal.png";
-  const typeTwo = "/assets/types/fire.png";
-  const shape = "/assets/shapes/upright.png";
+import { Hints } from "@/hooks/useSendGuess";
+import HintCardTypes from "./HintCardTypes";
 
-  const isCorrect = true;
+interface HintCardProps {
+  hints: Hints;
+}
+
+const HintCard = ({ hints }: HintCardProps) => {
+  const { id, types, shape, color, generation, height, weight } = hints;
+
+  const pokemonImg = `/assets/pokemon/${id}.png`;
+  const shapeImg = "/assets/shapes/upright.png";
+
+  const isCorrect = false;
 
   const bgColor = isCorrect ? "rgb(0, 134, 0)" : "rgb(148, 0, 0)";
-  const glow = isCorrect ? `0 0 8px 2px ${bgColor}` : `0 0 8px 2px ${bgColor}`;
 
   return (
     <VStack
       width={{ base: "95%", md: "500px" }}
       bg="custom.secondary"
-      border="3px solid"
+      border="5px double"
       borderColor="custom.accentDark"
-      borderRadius="md"
+      borderRadius="sm"
       boxShadow="5px 10px 20px rgba(0, 0, 0, 0.7)"
     >
       <HStack width="100%">
         <Image
           objectFit="cover"
           boxSize="110px"
-          src={imageURL}
+          src={pokemonImg}
           alt="The Guessed Pokemon"
         />
         <VStack flexGrow={1}>
-          <HStack>
-            <VStack>
-              <Box bg={bgColor} boxShadow={glow} borderRadius="md">
-                <Image
-                  src={typeOne}
-                  alt="Pokemon Type"
-                  width="100px"
-                  objectFit="contain"
-                />
-              </Box>
-            </VStack>
-            <VStack>
-              <Box bg={bgColor} boxShadow={glow} borderRadius="md">
-                <Image
-                  src={typeTwo}
-                  alt="Pokemon Type"
-                  width="100px"
-                  objectFit="contain"
-                />
-              </Box>
-            </VStack>
-          </HStack>
+          <HintCardTypes types={types} />
           <HStack justify="space-around" width="100%">
             <VStack gap={1}>
               <Text
@@ -66,7 +51,7 @@ const HintCard = () => {
                 borderRadius="md"
                 boxSize="40px"
               >
-                <Image src={shape} alt="Pokemon Shape" objectFit="contain" />
+                <Image src={shapeImg} alt="Pokemon Shape" objectFit="contain" />
               </Box>
             </VStack>
             <VStack gap={1}>
