@@ -16,7 +16,7 @@ const HintCard = ({ hints }: HintCardProps) => {
 
   return (
     <VStack
-      width={{ base: "95%", md: "500px" }}
+      width={{ base: "95%", lg: "500px" }}
       bgGradient="linear(to-t, custom.secondaryLight 20%,rgb(61, 61, 61))"
       border="4px double"
       borderColor="custom.accentDark"

@@ -1,14 +1,16 @@
 import { Grid, GridItem, Show } from "@chakra-ui/react";
 import NavBar from "./components/NavBar";
-import PokemonGuessInput from "./components/GuessingGame";
+import GuessingGame from "./components/GuessingGame";
 
 const App = () => {
   return (
     <Grid
       templateAreas={{ base: `"nav" "main"`, lg: `"nav nav" "aside main"` }}
       templateColumns={{ base: "1fr", lg: "200px 1fr" }}
+      templateRows={{ base: "auto 1fr", lg: "auto 1fr" }}
       bg="custom.primary"
       color="custom.secondary"
+      height="100vh"
     >
       <GridItem area={"nav"}>
         <NavBar />
@@ -20,12 +22,11 @@ const App = () => {
       </Show>
       <GridItem
         area={"main"}
-        height="100vh"
         display="flex"
         justifyContent="center"
         alignItems="center"
       >
-        <PokemonGuessInput />
+        <GuessingGame />
       </GridItem>
     </Grid>
   );

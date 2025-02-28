@@ -23,6 +23,7 @@ const GuessInput = ({ onSelect }: GuessInputProps) => {
   const handleSelection = (selected: Pokemon) => {
     setGuess(selected.name);
     onSelect(selected);
+    setGuess("");
   };
 
   return (
