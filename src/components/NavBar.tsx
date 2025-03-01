@@ -1,18 +1,18 @@
 import { HStack, Image, Text } from "@chakra-ui/react";
 import logo from "../assets/logo.svg";
-import ColorModeSwitch from "./ColorModeSwitch";
 
 const NavBar = () => {
   return (
     <HStack
       bg="custom.secondary"
+      spacing={5}
+      justifyContent="center"
       color="custom.primary"
-      justifyContent={"space-between"}
       paddingRight={"3px"}
     >
       <Image src={logo} boxSize={"70px"} />
       <Text fontSize={"2xl"}>Guessamon</Text>
-      <ColorModeSwitch />
+      <Image src={logo} boxSize={"70px"} />
     </HStack>
   );
 };

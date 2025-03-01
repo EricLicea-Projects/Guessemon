@@ -124,7 +124,7 @@ const GuessingGame = () => {
         onMouseUp={stopDragging}
         onMouseLeave={stopDragging}
       >
-        {hints.map((hint, index) => (
+        {[...hints].reverse().map((hint, index) => (
           <HintCard key={index} hints={hint} />
         ))}
       </VStack>
