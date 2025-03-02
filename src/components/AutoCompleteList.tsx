@@ -43,7 +43,7 @@ const AutoCompleteList = ({ guess, data, onSelect }: Props) => {
           >
             <Image
               boxSize="60px"
-              src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemon.id}.png`}
+              src={`/assets/pokemon/${pokemon.id}.png`}
               alt={pokemon.name}
             />
             <Text
