@@ -1,8 +1,21 @@
 import { Grid, GridItem, Show } from "@chakra-ui/react";
 import NavBar from "./components/NavBar";
 import GuessingGame from "./components/GuessingGame";
+import { useEffect } from "react";
 
 const App = () => {
+  useEffect(() => {
+    const setVhProperty = () => {
+      const vh = window.innerHeight * 0.01;
+      document.documentElement.style.setProperty("--vh", `${vh}px`);
+    };
+
+    setVhProperty();
+    window.addEventListener("resize", setVhProperty);
+
+    return () => window.removeEventListener("resize", setVhProperty);
+  }, []);
+
   return (
     <Grid
       templateAreas={{ base: `"nav" "main"`, lg: `"nav nav" "aside main"` }}
@@ -10,7 +23,7 @@ const App = () => {
       templateRows={{ base: "auto 1fr", lg: "auto 1fr" }}
       bg="custom.primary"
       color="custom.secondary"
-      height="100vh"
+      height="calc(var(--vh, 1vh) * 100)"
     >
       <GridItem area={"nav"}>
         <NavBar />
