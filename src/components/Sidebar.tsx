@@ -1,4 +1,4 @@
-import { VStack, HStack, Text, Image, Box } from "@chakra-ui/react";
+import { VStack, HStack, Text, Image } from "@chakra-ui/react";
 import { Link as RouterLink } from "react-router-dom";
 
 import homeIcon from "../assets/home.svg";
