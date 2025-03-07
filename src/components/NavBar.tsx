@@ -6,6 +6,8 @@ const NavBar = () => {
     <HStack
       bg="custom.secondary"
       spacing={5}
+      borderBottom="1px solid"
+      borderColor="custom.primary"
       justifyContent="center"
       color="custom.primary"
       paddingRight={"3px"}

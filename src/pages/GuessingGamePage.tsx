@@ -1,13 +1,12 @@
 import { Image, VStack, Text, HStack } from "@chakra-ui/react";
 import { useState, useRef } from "react";
 
-import HintCard from "./HintCard";
-
 import { Pokemon } from "@/data/pokemonData";
 import useSendGuess, { Hints, PokemonResponse } from "@/hooks/useSendGuess";
-import GuessInput from "./GuessInput";
+import GuessInput from "../components/GuessInput";
+import HintCard from "../components/HintCard";
 
-const GuessingGame = () => {
+const GuessingGamePage = () => {
   const { sendGuess } = useSendGuess();
   const [hints, setHints] = useState<Hints[]>([]);
   const [pokeOfDay, setPokeOfDay] = useState<Pokemon>({
@@ -132,4 +131,4 @@ const GuessingGame = () => {
   );
 };
 
-export default GuessingGame;
+export default GuessingGamePage;
