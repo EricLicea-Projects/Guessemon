@@ -4,7 +4,11 @@ import { Link as RouterLink } from "react-router-dom";
 import homeIcon from "../assets/home.svg";
 import aboutIcon from "../assets/about.svg";
 
-const Sidebar = () => {
+interface SidebarProps {
+  onLinkClick?: () => void;
+}
+
+const Sidebar = ({ onLinkClick }: SidebarProps) => {
   const links = [
     { name: "Home", to: "/", icon: homeIcon },
     { name: "About", to: "/about", icon: aboutIcon },
@@ -17,6 +21,7 @@ const Sidebar = () => {
           as={RouterLink}
           key={link.to}
           to={link.to}
+          sx={{ WebkitTapHighlightColor: "transparent" }}
           w="100%"
           py={3}
           px={2}
@@ -33,8 +38,10 @@ const Sidebar = () => {
           align="center"
           spacing={1}
           role="group"
+          onClick={onLinkClick}
         >
           <HStack
+            color="custom.primary"
             transition="transform 0.2s"
             _groupHover={{ transform: "scale(1.1)" }}
           >
