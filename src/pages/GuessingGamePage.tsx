@@ -1,10 +1,11 @@
 import { Image, VStack, Text, HStack } from "@chakra-ui/react";
-import { useState, useRef } from "react";
+import { useState } from "react";
 
 import { Pokemon } from "@/data/pokemonData";
 import useSendGuess, { Hints, PokemonResponse } from "@/hooks/useSendGuess";
 import GuessInput from "../components/GuessInput";
 import HintCard from "../components/HintCard";
+import HintCardContainer from "@/components/HintCardContainer";
 
 const GuessingGamePage = () => {
   const { sendGuess } = useSendGuess();
@@ -13,12 +14,6 @@ const GuessingGamePage = () => {
     id: 0,
     name: "unknown",
   });
-  const containerRef = useRef<HTMLDivElement>(null);
-
-  // Variables to track dragging state
-  const [isDragging, setIsDragging] = useState(false);
-  const [startY, setStartY] = useState(0);
-  const [scrollStart, setScrollStart] = useState(0);
 
   const handleSelection = async (selected: Pokemon) => {
     console.log("User selected Pokemon ID:", selected.id);
@@ -32,28 +27,6 @@ const GuessingGamePage = () => {
       return;
     }
     setHints((prevHints) => [...prevHints, result.hints]);
-  };
-
-  const handleMouseDown = (e: React.MouseEvent) => {
-    if (containerRef.current) {
-      setIsDragging(true);
-      // Record the initial mouse position and scroll position
-      setStartY(e.pageY);
-      setScrollStart(containerRef.current.scrollTop);
-    }
-  };
-
-  const handleMouseMove = (e: React.MouseEvent) => {
-    if (!isDragging || !containerRef.current) return;
-    e.preventDefault();
-    // Calculate the difference between the current and initial mouse positions
-    const deltaY = e.pageY - startY;
-    // Update the scroll position of the container
-    containerRef.current.scrollTop = scrollStart - deltaY;
-  };
-
-  const stopDragging = () => {
-    setIsDragging(false);
   };
 
   return (
@@ -95,38 +68,11 @@ const GuessingGamePage = () => {
         </VStack>
       </HStack>
       <GuessInput onSelect={handleSelection} />
-      <VStack
-        ref={containerRef}
-        py={3}
-        spacing={3}
-        width={{ base: "100%", lg: "550px" }}
-        height={{ base: "400px", lg: "500px" }}
-        overflowY="scroll"
-        overflowX="hidden"
-        sx={{
-          maskImage:
-            "linear-gradient(to bottom, transparent 0%, black 2%, black 98%, transparent 100%)",
-          WebkitMaskImage:
-            "linear-gradient(to bottom, transparent 0%, black 2%, black 98%, transparent 100%)",
-          scrollbarWidth: "none",
-          msOverflowStyle: "none",
-          "&::-webkit-scrollbar": {
-            display: "none",
-          },
-          cursor: isDragging ? "grabbing" : "grab",
-          // Prevent text selection while dragging
-          userSelect: isDragging ? "none" : "auto",
-          WebkitUserSelect: isDragging ? "none" : "auto",
-        }}
-        onMouseDown={handleMouseDown}
-        onMouseMove={handleMouseMove}
-        onMouseUp={stopDragging}
-        onMouseLeave={stopDragging}
-      >
+      <HintCardContainer>
         {[...hints].reverse().map((hint, index) => (
           <HintCard key={index} hints={hint} />
         ))}
-      </VStack>
+      </HintCardContainer>
     </VStack>
   );
 };
