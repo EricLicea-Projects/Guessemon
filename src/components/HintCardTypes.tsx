@@ -1,5 +1,5 @@
 import { HStack, Image } from "@chakra-ui/react";
-import { TypesHint } from "@/hooks/useSendGuess";
+import { TypesHint } from "@/hooks/useHintStore";
 
 interface HintCardTypesProps {
   types: TypesHint;

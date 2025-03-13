@@ -12,12 +12,13 @@ const Layout = () => {
       bg="custom.primary"
       color="custom.secondary"
       height="100vh"
+      overflow="hidden"
     >
       <GridItem area="nav">
         <NavBar />
       </GridItem>
       <Show above="lg">
-        <GridItem area="aside" bg="custom.secondary" color="custom.primary">
+        <GridItem area="aside" bg="custom.primaryLight" color="custom.primary">
           <Sidebar />
         </GridItem>
       </Show>

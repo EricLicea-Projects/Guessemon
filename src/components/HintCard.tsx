@@ -1,6 +1,6 @@
 import { Divider, HStack, Image, VStack } from "@chakra-ui/react";
 
-import { Hints } from "@/hooks/useSendGuess";
+import { Hints } from "@/hooks/useHintStore";
 import HintCardTypes from "./HintCardTypes";
 import HintCardAttribute from "./HintCardAttribute";
 import HintCardText from "./HintCardText";
@@ -17,9 +17,9 @@ const HintCard = ({ hints }: HintCardProps) => {
   return (
     <VStack
       width={{ base: "95%", lg: "500px" }}
-      bgGradient="linear(to-t, custom.secondaryLight 20%,rgb(61, 61, 61))"
-      border="4px double"
-      borderColor="custom.accentDark"
+      bgGradient="linear(to-t, custom.primaryLight 35%, #0040bf)"
+      border="4px solid"
+      borderColor="custom.primaryBorder"
       borderRadius="sm"
       boxShadow="5px 10px 20px rgba(0, 0, 0, 0.7)"
     >
@@ -55,7 +55,7 @@ const HintCard = ({ hints }: HintCardProps) => {
         </VStack>
       </HStack>
       <Divider
-        borderColor="custom.accentDark"
+        borderColor="custom.primaryBorder"
         borderWidth="1px"
         orientation="horizontal"
         my={0}

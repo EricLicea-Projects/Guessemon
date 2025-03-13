@@ -8,13 +8,16 @@ const config: ThemeConfig = {
 
 const colors = {
   custom: {
-    primary: "#dad2af",
-    secondary: "#252525",
-    secondaryLight: "#2b2b2b",
-    accent: "#a978ff",
+    primary: "#040f16",
+    primaryLight: "#000022",
+    primaryBorder: "#005E7C",
+    secondary: "#001242",
+    secondaryLight: "#005E7C",
+    accent: "#0008ff",
     accentDark: "#5e4c3e",
     correct: "#84ff00",
     wrong: "#ff2e6d",
+    text: "#0094C6",
   },
   hintColor: {
     black: "#121212",
@@ -30,6 +33,11 @@ const colors = {
   },
 };
 
-const theme = extendTheme({ config, colors });
+const fonts = {
+  heading: '"Press Start 2P", cursive',
+  body: '"Press Start 2P", cursive',
+};
+
+const theme = extendTheme({ config, colors, fonts });
 
 export default theme;

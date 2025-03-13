@@ -1,13 +1,7 @@
-import {
-  Image,
-  Input,
-  InputGroup,
-  InputLeftElement,
-  InputRightElement,
-} from "@chakra-ui/react";
+import { Box, Input, InputGroup, InputRightElement } from "@chakra-ui/react";
 import { useState } from "react";
 
-import question from "../assets/question.png";
+import Pokedex from "./Pokedex";
 import ClearInputButton from "./ClearInputButton";
 import AutoCompleteList from "./AutoCompleteList";
 
@@ -27,43 +21,51 @@ const GuessInput = ({ onSelect }: GuessInputProps) => {
   };
 
   return (
-    <InputGroup size="lg" zIndex="1" mb={5} width="300px">
-      <InputLeftElement
-        pointerEvents="none"
+    <Box position="relative" width={{ base: "80%", lg: "300px" }}>
+      <Box
+        position="absolute"
+        left="-35px"
         top="50%"
-        left="5px"
-        transform="translateY(-50%)"
+        transform="translateY(-70%)"
+        zIndex="2"
       >
-        <Image boxSize="40px" src={question} alt="Pokeball Icon" />
-      </InputLeftElement>
-      <Input
-        bg="custom.secondary"
-        color="custom.primary"
-        fontSize="md"
-        textAlign="center"
-        fontFamily='"Press Start 2P", cursive'
-        placeholder="Guess"
-        _placeholder={{ color: "custom.primary", opacity: 0.8 }}
-        variant="filled"
-        _hover={{ bg: "custom.secondaryLight" }}
-        _focus={{
-          bg: "custom.secondaryLight",
-          borderColor: "custom.accent",
-        }}
-        borderRadius="md"
-        size="lg"
-        value={guess}
-        onChange={(event) => setGuess(event.target.value)}
-      />
-      <InputRightElement>
-        {guess && <ClearInputButton onClear={() => setGuess("")} />}
-      </InputRightElement>
-      <AutoCompleteList
-        guess={guess}
-        data={pokemonList}
-        onSelect={handleSelection}
-      />
-    </InputGroup>
+        <Pokedex />
+      </Box>
+      <InputGroup zIndex="1">
+        <Input
+          variant="outline"
+          bg="custom.primaryLight"
+          color="custom.text"
+          fontSize="md"
+          textAlign="center"
+          placeholder="Guess"
+          _placeholder={{
+            transform: "translateX(13px)",
+            color: "custom.text",
+            opacity: 0.6,
+          }}
+          _hover={{ bg: "custom.secondary" }}
+          _focus={{
+            bg: "custom.secondary",
+            borderColor: "custom.primaryBorder",
+            _placeholder: { opacity: 0 },
+          }}
+          borderRadius="3xl"
+          borderColor="custom.primaryBorder"
+          size="lg"
+          value={guess}
+          onChange={(event) => setGuess(event.target.value)}
+        />
+        <InputRightElement top="50%" transform="translateY(-50%)">
+          {guess && <ClearInputButton onClear={() => setGuess("")} />}
+        </InputRightElement>
+        <AutoCompleteList
+          guess={guess}
+          data={pokemonList}
+          onSelect={handleSelection}
+        />
+      </InputGroup>
+    </Box>
   );
 };
 

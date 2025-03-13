@@ -1,5 +1,5 @@
 import { VStack, Text, Box, Image } from "@chakra-ui/react";
-import { AttributeHint } from "@/hooks/useSendGuess";
+import { AttributeHint } from "@/hooks/useHintStore";
 
 interface HintCardAttributeProps {
   attribute: AttributeHint;

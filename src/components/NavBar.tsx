@@ -21,12 +21,12 @@ const NavBar = () => {
   return (
     <>
       <HStack
-        bg="custom.secondary"
+        bg="custom.primaryLight"
         spacing={5}
         borderBottom="1px solid"
-        borderColor="custom.primary"
+        borderColor="custom.primaryBorder"
         justifyContent="center"
-        color="custom.primary"
+        color="custom.text"
         paddingRight="3px"
       >
         <IconButton

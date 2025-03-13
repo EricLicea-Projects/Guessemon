@@ -20,14 +20,13 @@ const AutoCompleteList = ({ guess, data, onSelect }: Props) => {
 
   return (
     <Box
-      bg="custom.secondary"
+      bg="custom.primaryLight"
       position="absolute"
       top="100%"
       left="0"
       right="0"
       zIndex="1000"
-      borderRadius="md"
-      boxShadow="lg"
+      borderRadius="2xl"
       maxH="200px"
       overflowY="auto"
     >
@@ -36,21 +35,18 @@ const AutoCompleteList = ({ guess, data, onSelect }: Props) => {
           <HStack
             key={pokemon.id}
             p={2}
-            borderRadius="md"
-            _hover={{ bg: "custom.secondaryLight", cursor: "pointer" }}
-            onClick={() => onSelect(pokemon)}
             spacing={0}
+            borderBottom="1px solid"
+            borderColor="custom.primaryBorder"
+            _hover={{ bg: "custom.secondary", cursor: "pointer" }}
+            onClick={() => onSelect(pokemon)}
           >
             <Image
               boxSize="60px"
               src={`/assets/pokemon/${pokemon.id}.png`}
               alt={pokemon.name}
             />
-            <Text
-              color="custom.primary"
-              fontSize="lg"
-              fontFamily='"Press Start 2P", cursive'
-            >
+            <Text color="custom.text" fontSize="xl">
               {pokemon.name}
             </Text>
           </HStack>

@@ -59,7 +59,7 @@ export const pokemonList: Pokemon[] = [
   { id: 53, name: "Persian" },
   { id: 54, name: "Psyduck" },
   { id: 55, name: "Golduck" },
-  { id: 56, name: "Manid" },
+  { id: 56, name: "Mankey" },
   { id: 57, name: "Primeape" },
   { id: 58, name: "Growlithe" },
   { id: 59, name: "Arcanine" },

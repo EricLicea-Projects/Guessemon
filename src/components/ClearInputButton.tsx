@@ -9,9 +9,9 @@ const ClearInputButton = ({ onClear }: ClearInputButtonProps) => {
   return (
     <IconButton
       isRound={true}
-      variant="ghost"
+      variant="filled"
       size="sm"
-      colorScheme="orange"
+      color="custom.secondaryLight"
       aria-label="Clear Input"
       icon={<CloseIcon />}
       onClick={onClear}
