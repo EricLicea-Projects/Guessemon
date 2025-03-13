@@ -36,6 +36,7 @@ const colors = {
 const fonts = {
   heading: '"Press Start 2P", cursive',
   body: '"Press Start 2P", cursive',
+  color: "custom.text",
 };
 
 const theme = extendTheme({ config, colors, fonts });

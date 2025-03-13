@@ -37,28 +37,25 @@ const Sidebar = ({ onLinkClick }: SidebarProps) => {
           px={2}
           borderBottom="1px solid"
           borderColor="custom.primaryBorder"
-          fontWeight="bold"
-          fontSize="lg"
-          fontFamily='"Press Start 2P", cursive'
           _hover={{
             bg: "custom.secondary",
             textDecoration: "none",
           }}
           justify="flex-start"
           align="center"
-          spacing={1}
           role="group"
           onClick={onLinkClick}
         >
           <HStack
-            color="custom.text"
             transition="transform 0.2s"
             _groupHover={{ transform: "scale(1.1)" }}
           >
             {link.icon && (
               <Image src={link.icon} alt={`${link.name} Icon`} boxSize="50px" />
             )}
-            <Text mx={3}>{link.name}</Text>
+            <Text mx={3} fontSize="lg" color="custom.text">
+              {link.name}
+            </Text>
           </HStack>
         </HStack>
       ))}

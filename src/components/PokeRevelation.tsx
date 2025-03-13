@@ -47,7 +47,7 @@ const PokeRevelation = ({
     : `brightness(0) saturate(100%) invert(1) blur(${blurAmount}rem)`;
 
   return (
-    <Box position="relative" my={5} boxSize="200px">
+    <Box position="relative" boxSize="200px">
       <Box
         position="absolute"
         top="50%"
@@ -67,7 +67,6 @@ const PokeRevelation = ({
         borderRadius="full"
         overflow="hidden"
         bg="custom.primary"
-        boxShadow="lg"
         zIndex={1}
       >
         <Image
@@ -78,6 +77,7 @@ const PokeRevelation = ({
           filter={imageFilter}
           onClick={playCry}
           cursor="pointer"
+          sx={{ WebkitTapHighlightColor: "transparent" }}
         />
       </Box>
     </Box>

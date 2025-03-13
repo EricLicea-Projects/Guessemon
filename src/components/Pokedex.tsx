@@ -22,6 +22,7 @@ const Pokedex = () => {
           p={0}
           _hover={{ background: "transparent" }}
           _active={{ background: "transparent" }}
+          sx={{ WebkitTapHighlightColor: "transparent" }}
         >
           <Image
             src={pokedexImg}
@@ -36,11 +37,7 @@ const Pokedex = () => {
       <PopoverContent borderColor="custom.primaryBorder" border="3px double">
         <PopoverArrow bg="custom.primaryBorder" />
         <PopoverBody bg="custom.primaryLight">
-          <Text
-            color="custom.text"
-            fontSize="xs"
-            fontFamily='"Press Start 2P", cursive'
-          >
+          <Text color="custom.text" fontSize="xs">
             {data ? data.flavor_text : "Loading..."}
           </Text>
         </PopoverBody>
