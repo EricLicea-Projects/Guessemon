@@ -1,4 +1,5 @@
 import {
+  Flex,
   HStack,
   Image,
   Text,
@@ -20,14 +21,15 @@ const NavBar = () => {
 
   return (
     <>
-      <HStack
+      <Flex
         bg="custom.primaryLight"
-        spacing={5}
+        h="70px"
+        color="custom.text"
         borderBottom="1px solid"
         borderColor="custom.primaryBorder"
-        justifyContent="center"
-        color="custom.text"
-        paddingRight="3px"
+        align="center"
+        justify="center"
+        position="relative"
       >
         <IconButton
           aria-label="Open menu"
@@ -35,18 +37,23 @@ const NavBar = () => {
           display={{ base: "block", lg: "none" }}
           onClick={onOpen}
           variant="ghost"
-          color="custom.primary"
+          color="custom.text"
+          position="absolute"
+          left="0.5rem"
         />
-        <Image src={logo} boxSize="70px" />
-        <Text fontSize="2xl">Guessamon</Text>
-        <Image src={logo} boxSize="70px" />
-      </HStack>
+
+        <HStack spacing={0}>
+          <Image src={logo} boxSize="70px" />
+          <Text fontSize="md">Guessamon</Text>
+          <Image src={logo} boxSize="70px" />
+        </HStack>
+      </Flex>
 
       <Drawer placement="left" onClose={onClose} isOpen={isOpen} size="full">
         <DrawerOverlay bg="rgba(0, 0, 0, 0.85)" />
         <DrawerContent bg="transparent">
-          <DrawerCloseButton color="custom.primary" />
-          <DrawerHeader color="custom.primary">Menu</DrawerHeader>
+          <DrawerCloseButton color="custom.text" />
+          <DrawerHeader color="custom.text">Menu</DrawerHeader>
           <DrawerBody p={0}>
             <Sidebar onLinkClick={onClose} />
           </DrawerBody>
