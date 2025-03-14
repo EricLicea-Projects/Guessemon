@@ -30,7 +30,7 @@ const GuessingGamePage = () => {
   }, [pokemonOfTheDay, storedPokemon, resetGame, setCurrentPokemon]);
 
   return (
-    <VStack py={4} width="100%" height="100%" justifyContent="space-between">
+    <VStack pt={5} width="100%" height="100%" spacing={7}>
       <PokeRevelation
         pokemonOfTheDay={pokemonOfTheDay}
         numOfGuesses={hints.length}

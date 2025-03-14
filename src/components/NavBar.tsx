@@ -29,10 +29,10 @@ const NavBar = () => {
         borderBottom="1px solid"
         borderColor="custom.primaryBorder"
         align="center"
-        justify={{ base: "center", lg: "flex-start" }}
+        justify={{ base: "center", xl: "flex-start" }}
       >
         <IconButton
-          display={{ base: "block", lg: "none" }}
+          display={{ base: "block", xl: "none" }}
           aria-label="Open menu"
           variant="ghost"
           icon={<HamburgerIcon boxSize="25px" />}
@@ -44,7 +44,7 @@ const NavBar = () => {
 
         <HStack spacing={0}>
           <Image
-            display={{ base: "none", lg: "block" }}
+            display={{ base: "none", xl: "block" }}
             src={logo}
             boxSize="60px"
           />
@@ -54,7 +54,12 @@ const NavBar = () => {
         </HStack>
       </Flex>
 
-      <Drawer placement="left" onClose={onClose} isOpen={isOpen} size="full">
+      <Drawer
+        placement="left"
+        onClose={onClose}
+        isOpen={isOpen}
+        size={{ base: "full", lg: "xs" }}
+      >
         <DrawerOverlay bg="rgba(0, 0, 0, 0.85)" />
         <DrawerContent bg="transparent">
           <DrawerCloseButton
@@ -63,7 +68,11 @@ const NavBar = () => {
             top="0.7rem"
             right="0.4rem"
           />
-          <DrawerHeader color="custom.text" borderBottom="1px solid">
+          <DrawerHeader
+            color="custom.text"
+            borderBottom="1px solid"
+            borderRight="1px solid"
+          >
             Menu
           </DrawerHeader>
           <DrawerBody p={0}>

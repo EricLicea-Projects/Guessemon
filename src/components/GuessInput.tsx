@@ -36,11 +36,12 @@ const GuessInput = ({ onSelect }: GuessInputProps) => {
           variant="outline"
           bg="custom.primaryLight"
           color="custom.text"
+          transform="translateX(10px)"
           fontSize="md"
           textAlign="center"
           placeholder="Guess"
           _placeholder={{
-            transform: "translateX(13px)",
+            transform: "translateX(10px)",
             color: "custom.text",
             opacity: 0.6,
           }}

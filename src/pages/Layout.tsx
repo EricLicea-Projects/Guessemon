@@ -6,9 +6,9 @@ import Sidebar from "@/components/Sidebar";
 const Layout = () => {
   return (
     <Grid
-      templateAreas={{ base: `"nav" "main"`, lg: `"nav nav" "aside main"` }}
-      templateColumns={{ base: "1fr", lg: "200px 1fr" }}
-      templateRows={{ base: "auto 1fr", lg: "auto 1fr" }}
+      templateAreas={{ base: `"nav" "main"`, xl: `"nav nav" "aside main"` }}
+      templateColumns={{ base: "1fr", xl: "200px 1fr" }}
+      templateRows={{ base: "auto 1fr", xl: "auto 1fr" }}
       bg="custom.primary"
       color="custom.secondary"
       height="100vh"
@@ -17,7 +17,7 @@ const Layout = () => {
       <GridItem area="nav">
         <NavBar />
       </GridItem>
-      <Show above="lg">
+      <Show above="xl">
         <GridItem area="aside" bg="custom.primaryLight" color="custom.primary">
           <Sidebar />
         </GridItem>
