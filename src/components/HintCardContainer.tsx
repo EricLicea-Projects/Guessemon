@@ -13,12 +13,15 @@ const HintCardContainer = ({ children }: HintCardContainerProps) => {
     handleMouseDown,
     handleMouseMove,
     stopDragging,
+    handleTouchEnd,
+    handleTouchMove,
+    handleTouchStart,
   } = useDragScroll();
 
   return (
     <VStack
       ref={containerRef}
-      py={3}
+      pb={10}
       spacing={3}
       width={{ base: "100%", lg: "550px" }}
       height={{ base: "400px", lg: "500px" }}
@@ -42,6 +45,10 @@ const HintCardContainer = ({ children }: HintCardContainerProps) => {
       onMouseMove={handleMouseMove}
       onMouseUp={stopDragging}
       onMouseLeave={stopDragging}
+      onTouchStart={handleTouchStart}
+      onTouchMove={handleTouchMove}
+      onTouchEnd={handleTouchEnd}
+      onTouchCancel={handleTouchEnd}
     >
       {children}
     </VStack>
