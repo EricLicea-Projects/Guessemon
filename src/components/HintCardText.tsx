@@ -27,7 +27,7 @@ const HintCardText = ({ id, weight, height }: HintCardTextProps) => {
   const message = hintMessages[messageKey] || `${pokemonName} is a mystery!`;
 
   return (
-    <Text p={3} color="custom.text" fontSize="xs">
+    <Text ml="1rem" color="custom.text" fontSize="xs">
       {message}
     </Text>
   );

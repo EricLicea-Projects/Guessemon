@@ -21,7 +21,7 @@ const GuessInput = ({ onSelect }: GuessInputProps) => {
   };
 
   return (
-    <Box position="relative" width={{ base: "80%", lg: "300px" }}>
+    <Box position="relative" width={{ base: "80%", md: "300px" }}>
       <Box
         position="absolute"
         left="-35px"
@@ -34,10 +34,10 @@ const GuessInput = ({ onSelect }: GuessInputProps) => {
       <InputGroup zIndex="1">
         <Input
           variant="outline"
+          size={{ base: "md", lg: "md" }}
           bg="custom.primaryLight"
           color="custom.text"
-          transform="translateX(10px)"
-          fontSize="md"
+          fontSize={{ base: "md", lg: "md" }}
           textAlign="center"
           placeholder="Guess"
           _placeholder={{
@@ -51,9 +51,9 @@ const GuessInput = ({ onSelect }: GuessInputProps) => {
             borderColor: "custom.primaryBorder",
             _placeholder: { opacity: 0 },
           }}
+          transform="translateX(10px)"
           borderRadius="3xl"
           borderColor="custom.primaryBorder"
-          size="lg"
           value={guess}
           onChange={(event) => setGuess(event.target.value)}
         />

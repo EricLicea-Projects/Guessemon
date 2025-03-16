@@ -32,7 +32,12 @@ const GuessingGamePage = () => {
   }, [pokemonOfTheDay, storedPokemon, resetGame, setCurrentPokemon]);
 
   return (
-    <VStack pt={5} width="100%" height="100%" spacing={7}>
+    <VStack
+      pt={{ base: 3, md: 4, lg: 5 }}
+      width="100%"
+      height="100%"
+      spacing={{ base: 4, md: 5, lg: 6 }}
+    >
       <PokeRevelation
         pokemonOfTheDay={pokemonOfTheDay}
         numOfGuesses={hints.length}

@@ -34,8 +34,8 @@ const HintCard = () => {
       ) : (
         <MotionVStack
           key={hint.id}
-          width={{ base: "95%", xl: "500px" }}
-          height="200px"
+          width={{ base: "95%", md: "500px" }}
+          height="180px"
           bgGradient="linear(to-t, custom.primaryLight 35%, #0040bf)"
           border="4px solid"
           borderColor="custom.primaryBorder"
@@ -46,7 +46,11 @@ const HintCard = () => {
           exit={{ opacity: 0, x: 100 }}
           transition={{ duration: 0.1 }}
         >
-          <HStack width="100%">
+          <HStack
+            width="100%"
+            borderBottom="3px dotted"
+            borderColor="custom.primaryBorder"
+          >
             <Image
               objectFit="cover"
               boxSize="110px"
@@ -77,12 +81,6 @@ const HintCard = () => {
               </HStack>
             </VStack>
           </HStack>
-          <Divider
-            borderColor="custom.primaryBorder"
-            borderWidth="1px"
-            orientation="horizontal"
-            my={0}
-          />
           <HintCardText
             id={hint.id}
             height={hint.height}

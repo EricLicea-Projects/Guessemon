@@ -42,7 +42,7 @@ const PokeballHintGrid = () => {
           >
             <Image
               src={src}
-              boxSize="80px"
+              boxSize={{ base: "40px", lg: "80px" }}
               transition="transform 0.2s ease"
               _groupHover={{ transform: "scale(1.1)" }}
             />

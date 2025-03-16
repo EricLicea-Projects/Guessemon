@@ -49,7 +49,7 @@ const PokeRevelation = ({
     : `brightness(0) saturate(100%) invert(1) blur(${blurAmount}rem)`;
 
   return (
-    <Box position="relative" boxSize="200px">
+    <Box position="relative" boxSize={{ base: "150px", md: "200px" }}>
       <Box
         position="absolute"
         top="50%"
@@ -59,13 +59,13 @@ const PokeRevelation = ({
         borderRadius="full"
         background={borderBackground}
         zIndex={0}
-        filter="blur(0.9rem)"
+        filter={{ base: "blur(0.6rem)", md: "blur(0.5rem)" }}
         opacity={0.8}
         animation={animationStyle}
       />
       <Box
         position="relative"
-        boxSize="200px"
+        boxSize="100%"
         borderRadius="full"
         overflow="hidden"
         bg="custom.primary"
@@ -82,7 +82,11 @@ const PokeRevelation = ({
           draggable={false}
           onDragStart={(e) => e.preventDefault()}
           onContextMenu={(e) => e.preventDefault()}
-          sx={{ WebkitTapHighlightColor: "transparent", userSelect: "none" }}
+          sx={{
+            WebkitTapHighlightColor: "transparent",
+            userSelect: "none",
+            WebkitTouchCallout: "none",
+          }}
         />
       </Box>
     </Box>
