@@ -1,4 +1,4 @@
-import { Divider, HStack, Image, VStack } from "@chakra-ui/react";
+import { HStack, Image, VStack } from "@chakra-ui/react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useSelectedHint } from "../hooks/useSelectedHint";
 import HintCardTypes from "./HintCardTypes";
