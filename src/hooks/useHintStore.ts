@@ -33,9 +33,11 @@ interface HintStore {
   hints: Hints[];
   correct: boolean;
   currentPokemon: number | null;
+  selectedHintIndex: number | null;
   addHint: (hint: Hints) => void;
   setCorrect: (value: boolean) => void;
   setCurrentPokemon: (value: number) => void;
+  setSelectedHintIndex: (index: number) => void;
   reset: () => void;
 }
 
@@ -45,10 +47,17 @@ const useHintStore = create<HintStore>()(
       hints: [],
       correct: false,
       currentPokemon: null,
-      addHint: (hint) => set((state) => ({ hints: [...state.hints, hint] })),
+      selectedHintIndex: null,
+      addHint: (hint) =>
+        set((state) => ({
+          hints: [...state.hints, hint],
+          selectedHintIndex: [...state.hints, hint].length - 1,
+        })),
       setCorrect: (value: boolean) => set({ correct: value }),
       setCurrentPokemon: (value: number) => set({ currentPokemon: value }),
-      reset: () => set({ hints: [], correct: false }),
+      setSelectedHintIndex: (value: number) =>
+        set({ selectedHintIndex: value }),
+      reset: () => set({ hints: [], correct: false, selectedHintIndex: null }),
     }),
     { name: "hints-storage" }
   )

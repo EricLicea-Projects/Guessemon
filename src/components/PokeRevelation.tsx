@@ -6,6 +6,7 @@ import { keyframes } from "@emotion/react";
 interface PokeRevelationProps {
   pokemonOfTheDay: PokeOfTheDay | null;
   numOfGuesses: number;
+  gameOver: boolean;
 }
 
 const spinAnimation = keyframes`
@@ -22,6 +23,7 @@ const pulseAnimation = keyframes`
 const PokeRevelation = ({
   pokemonOfTheDay,
   numOfGuesses,
+  gameOver,
 }: PokeRevelationProps) => {
   const hasWon = useHintStore((state) => state.correct);
 
@@ -42,7 +44,7 @@ const PokeRevelation = ({
     ? "conic-gradient(from 0deg, red, orange, yellow, green, blue, indigo, violet)"
     : "conic-gradient(from 0deg, rgb(92, 82, 182), rgb(212, 52, 204), rgb(92, 82, 182), rgb(212, 52, 204))";
 
-  const imageFilter = hasWon
+  const imageFilter = gameOver
     ? "none"
     : `brightness(0) saturate(100%) invert(1) blur(${blurAmount}rem)`;
 
@@ -77,7 +79,10 @@ const PokeRevelation = ({
           filter={imageFilter}
           onClick={playCry}
           cursor="pointer"
-          sx={{ WebkitTapHighlightColor: "transparent" }}
+          draggable={false}
+          onDragStart={(e) => e.preventDefault()}
+          onContextMenu={(e) => e.preventDefault()}
+          sx={{ WebkitTapHighlightColor: "transparent", userSelect: "none" }}
         />
       </Box>
     </Box>

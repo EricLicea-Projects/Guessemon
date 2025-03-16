@@ -1,7 +1,11 @@
 import { useEffect, useState } from "react";
 import { VStack, Text } from "@chakra-ui/react";
 
-const CountdownTimer = () => {
+interface CountdownTimerProps {
+  gameStatus: "won" | "lost";
+}
+
+const CountdownTimer = ({ gameStatus }: CountdownTimerProps) => {
   const calculateTimeLeft = () => {
     const now = new Date();
     const nextMidnightUTC = new Date(
@@ -35,6 +39,8 @@ const CountdownTimer = () => {
 
   const [timeLeft, setTimeLeft] = useState(calculateTimeLeft());
 
+  const topMessage = gameStatus === "won" ? "Congrats!" : "Out of Pokéballs!";
+
   useEffect(() => {
     const timer = setInterval(() => {
       setTimeLeft(calculateTimeLeft());
@@ -48,7 +54,7 @@ const CountdownTimer = () => {
   return (
     <VStack
       p={2}
-      spacing={3}
+      spacing={1}
       width={{ base: "90%", lg: "350px" }}
       bg="custom.primaryLight"
       color="custom.text"
@@ -56,10 +62,9 @@ const CountdownTimer = () => {
       border="3px solid"
       borderColor="custom.primaryBorder"
     >
-      <Text fontSize="sm" fontFamily='"Press Start 2P", cursive'>
-        Next Pokémon arrives in
-      </Text>
-      <Text fontSize="md" fontFamily='"Press Start 2P", cursive'>
+      <Text fontSize="sm">{topMessage}</Text>
+      <Text fontSize="sm">Next Pokémon arrives in</Text>
+      <Text fontSize="md">
         {formatTime(timeLeft.hours)}:{formatTime(timeLeft.minutes)}:
         {formatTime(timeLeft.seconds)}
       </Text>

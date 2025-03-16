@@ -1,14 +1,14 @@
 import { VStack } from "@chakra-ui/react";
 
 import GuessInput from "../components/GuessInput";
-import HintCard from "../components/HintCard";
-import HintCardContainer from "@/components/HintCardContainer";
 import PokeRevelation from "@/components/PokeRevelation";
 import useGetPokeOfDay from "@/hooks/useGetPokeOfDay";
 import useGuessHandler from "@/hooks/useGuessHandler";
 import useHintStore from "@/hooks/useHintStore";
 import CountdownTimer from "@/components/CountdownTimer";
 import { useEffect } from "react";
+import PokeballHintGrid from "@/components/PokeballHintGrid";
+import HintCard from "@/components/HintCard";
 
 const GuessingGamePage = () => {
   const { pokemonOfTheDay } = useGetPokeOfDay();
@@ -18,6 +18,8 @@ const GuessingGamePage = () => {
   const resetGame = useHintStore((state) => state.reset);
   const setCurrentPokemon = useHintStore((state) => state.setCurrentPokemon);
   const storedPokemon = useHintStore((state) => state.currentPokemon);
+  const hasLost = !hasWon && hints.length > 5;
+  const gameOver = hasWon || hasLost;
 
   useEffect(() => {
     if (
@@ -34,13 +36,15 @@ const GuessingGamePage = () => {
       <PokeRevelation
         pokemonOfTheDay={pokemonOfTheDay}
         numOfGuesses={hints.length}
+        gameOver={gameOver}
       />
-      {hasWon ? <CountdownTimer /> : <GuessInput onSelect={submitGuess} />}
-      <HintCardContainer>
-        {[...hints].reverse().map((hint, index) => (
-          <HintCard key={index} hints={hint} />
-        ))}
-      </HintCardContainer>
+      {hasWon || hasLost ? (
+        <CountdownTimer gameStatus={hasWon ? "won" : "lost"} />
+      ) : (
+        <GuessInput onSelect={submitGuess} />
+      )}
+      <PokeballHintGrid />
+      <HintCard />
     </VStack>
   );
 };

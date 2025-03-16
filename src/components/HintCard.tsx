@@ -1,67 +1,96 @@
 import { Divider, HStack, Image, VStack } from "@chakra-ui/react";
-
-import { Hints } from "@/hooks/useHintStore";
+import { motion, AnimatePresence } from "framer-motion";
+import { useSelectedHint } from "../hooks/useSelectedHint";
 import HintCardTypes from "./HintCardTypes";
 import HintCardAttribute from "./HintCardAttribute";
 import HintCardText from "./HintCardText";
 
-interface HintCardProps {
-  hints: Hints;
-}
+const MotionVStack = motion.create(VStack);
 
-const HintCard = ({ hints }: HintCardProps) => {
-  const { id, types, shape, color, generation, height, weight } = hints;
-
-  const pokemonImg = `/assets/pokemon/${id}.png`;
+const HintCard = () => {
+  const hint = useSelectedHint();
+  const pokeball = "/assets/pokeball.png";
 
   return (
-    <VStack
-      width={{ base: "95%", lg: "500px" }}
-      bgGradient="linear(to-t, custom.primaryLight 35%, #0040bf)"
-      border="4px solid"
-      borderColor="custom.primaryBorder"
-      borderRadius="sm"
-      boxShadow="5px 10px 20px rgba(0, 0, 0, 0.7)"
-    >
-      <HStack width="100%">
-        <Image
-          objectFit="cover"
-          boxSize="110px"
-          src={pokemonImg}
-          alt="The Guessed Pokemon"
-        />
-        <VStack flexGrow={1}>
-          <HintCardTypes types={types} />
-          <HStack justify="space-around" width="100%">
-            <HintCardAttribute
-              attribute={shape}
-              name="Shape"
-              hasImg={true}
-              hasText={false}
+    <AnimatePresence mode="wait">
+      {!hint ? (
+        <MotionVStack
+          key="placeholder"
+          width={{ base: "95%", xl: "500px" }}
+          height="200px"
+          justify="center"
+          bgGradient="linear(to-t, custom.primaryLight 35%, #0040bf)"
+          border="4px solid"
+          borderColor="custom.primaryBorder"
+          borderRadius="sm"
+          boxShadow="5px 10px 20px rgba(0, 0, 0, 0.7)"
+          initial={{ opacity: 0, x: -100 }}
+          animate={{ opacity: 1, x: 0 }}
+          exit={{ opacity: 0, x: 100 }}
+          transition={{ duration: 0.1 }}
+        >
+          <Image src={pokeball} boxSize="110px" alt="Pokeball Placeholder" />
+        </MotionVStack>
+      ) : (
+        <MotionVStack
+          key={hint.id}
+          width={{ base: "95%", xl: "500px" }}
+          height="200px"
+          bgGradient="linear(to-t, custom.primaryLight 35%, #0040bf)"
+          border="4px solid"
+          borderColor="custom.primaryBorder"
+          borderRadius="sm"
+          boxShadow="5px 10px 20px rgba(0, 0, 0, 0.7)"
+          initial={{ opacity: 0, x: -100 }}
+          animate={{ opacity: 1, x: 0 }}
+          exit={{ opacity: 0, x: 100 }}
+          transition={{ duration: 0.1 }}
+        >
+          <HStack width="100%">
+            <Image
+              objectFit="cover"
+              boxSize="110px"
+              src={`/assets/pokemon/${hint.id}.png`}
+              alt="The Guessed Pokemon"
             />
-            <HintCardAttribute
-              attribute={color}
-              name="Color"
-              hasImg={false}
-              hasText={false}
-            />
-            <HintCardAttribute
-              attribute={generation}
-              name="Gen"
-              hasImg={false}
-              hasText={true}
-            />
+            <VStack flexGrow={1}>
+              <HintCardTypes types={hint.types} />
+              <HStack justify="space-around" width="100%">
+                <HintCardAttribute
+                  attribute={hint.shape}
+                  name="Shape"
+                  hasImg={true}
+                  hasText={false}
+                />
+                <HintCardAttribute
+                  attribute={hint.color}
+                  name="Color"
+                  hasImg={false}
+                  hasText={false}
+                />
+                <HintCardAttribute
+                  attribute={hint.generation}
+                  name="Gen"
+                  hasImg={false}
+                  hasText={true}
+                />
+              </HStack>
+            </VStack>
           </HStack>
-        </VStack>
-      </HStack>
-      <Divider
-        borderColor="custom.primaryBorder"
-        borderWidth="1px"
-        orientation="horizontal"
-        my={0}
-      />
-      <HintCardText id={id} height={height} weight={weight} />
-    </VStack>
+          <Divider
+            borderColor="custom.primaryBorder"
+            borderWidth="1px"
+            orientation="horizontal"
+            my={0}
+          />
+          <HintCardText
+            id={hint.id}
+            height={hint.height}
+            weight={hint.weight}
+          />
+        </MotionVStack>
+      )}
+    </AnimatePresence>
   );
 };
 

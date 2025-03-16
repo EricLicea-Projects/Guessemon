@@ -7,7 +7,7 @@ const Layout = () => {
   return (
     <Grid
       templateAreas={{ base: `"nav" "main"`, xl: `"nav nav" "aside main"` }}
-      templateColumns={{ base: "1fr", xl: "200px 1fr" }}
+      templateColumns={{ base: "100%", xl: "200px 1fr" }}
       templateRows={{ base: "auto 1fr", xl: "auto 1fr" }}
       bg="custom.primary"
       color="custom.secondary"
