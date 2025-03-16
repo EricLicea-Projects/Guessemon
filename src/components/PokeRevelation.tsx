@@ -28,7 +28,7 @@ const PokeRevelation = ({
   const hasWon = useHintStore((state) => state.correct);
 
   const pokemonImg = `/assets/pokemon/${pokemonOfTheDay?.id ?? 0}.png`;
-  const cryUrl = `/assets/cries/${pokemonOfTheDay?.id ?? 25}.ogg`;
+  const cryUrl = `/assets/cries/${pokemonOfTheDay?.id ?? 25}.mp3`;
   const blurAmount = Math.max(1 - numOfGuesses * 0.1, 0.4);
 
   const playCry = () => {
