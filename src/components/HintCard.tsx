@@ -17,7 +17,7 @@ const HintCard = () => {
         <MotionVStack
           key="placeholder"
           width={{ base: "95%", md: "500px" }}
-          height="200px"
+          height="180px"
           justify="center"
           bgGradient="linear(to-t, custom.primaryLight 35%, #0040bf)"
           border="4px solid"

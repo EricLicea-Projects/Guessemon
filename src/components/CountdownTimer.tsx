@@ -53,7 +53,7 @@ const CountdownTimer = ({ gameStatus }: CountdownTimerProps) => {
 
   return (
     <VStack
-      p={2}
+      p={1}
       spacing={1}
       width={{ base: "90%", lg: "350px" }}
       bg="custom.primaryLight"
@@ -63,7 +63,7 @@ const CountdownTimer = ({ gameStatus }: CountdownTimerProps) => {
       borderColor="custom.primaryBorder"
     >
       <Text fontSize="sm">{topMessage}</Text>
-      <Text fontSize="sm">Next Pokémon arrives in</Text>
+      <Text fontSize="sm">Next Pokémon in</Text>
       <Text fontSize="md">
         {formatTime(timeLeft.hours)}:{formatTime(timeLeft.minutes)}:
         {formatTime(timeLeft.seconds)}
