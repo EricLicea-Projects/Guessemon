@@ -16,7 +16,7 @@ const useGuessHandler = () => {
   const mutation = useMutation<PokemonResponse, Error, number>({
     mutationFn: (pokemonId: number) =>
       apiClient
-        .post<PokemonResponse>(`/guesses/${pokemonId}`)
+        .post<PokemonResponse>(`/api/v1/guesses/${pokemonId}`)
         .then((res) => res.data),
     onSuccess: (data: PokemonResponse) => {
       addHint(data.hints);

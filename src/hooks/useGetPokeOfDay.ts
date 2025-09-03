@@ -11,7 +11,9 @@ const useGetPokeOfDay = () => {
   const query = useQuery({
     queryKey: ["pokemonOfTheDay"],
     queryFn: () =>
-      apiClient.get<PokeOfTheDay>("pokemon_of_day").then((res) => res.data),
+      apiClient
+        .get<PokeOfTheDay>("api/v1/pokemon_of_day")
+        .then((res) => res.data),
     initialData: null,
   });
 
