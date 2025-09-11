@@ -1,35 +1,31 @@
 import { VStack } from "@chakra-ui/react";
+import { useShallow } from "zustand/shallow";
 
+import HintCard from "@/components/HintCard";
 import GuessInput from "../components/GuessInput";
+import CountdownTimer from "@/components/CountdownTimer";
 import PokeRevelation from "@/components/PokeRevelation";
-import useGetPokeOfDay from "@/hooks/useGetPokeOfDay";
+import PokeballHintGrid from "@/components/PokeballHintGrid";
+
 import useGuessHandler from "@/hooks/useGuessHandler";
 import useHintStore from "@/hooks/useHintStore";
-import CountdownTimer from "@/components/CountdownTimer";
-import { useEffect } from "react";
-import PokeballHintGrid from "@/components/PokeballHintGrid";
-import HintCard from "@/components/HintCard";
+import useGetPokeOfDay from "@/hooks/useGetPokeOfDay";
+
+const MAX_GUESSES = 6;
 
 const GuessingGamePage = () => {
   const { pokemonOfTheDay } = useGetPokeOfDay();
   const { submitGuess } = useGuessHandler();
-  const hints = useHintStore((state) => state.hints);
-  const hasWon = useHintStore((state) => state.correct);
-  const resetGame = useHintStore((state) => state.reset);
-  const setCurrentPokemon = useHintStore((state) => state.setCurrentPokemon);
-  const storedPokemon = useHintStore((state) => state.currentPokemon);
-  const hasLost = !hasWon && hints.length > 5;
-  const gameOver = hasWon || hasLost;
+  const { hints, hasWon } = useHintStore(
+    useShallow((state) => ({
+      hints: state.hints,
+      hasWon: state.correct,
+    }))
+  );
 
-  useEffect(() => {
-    if (
-      pokemonOfTheDay &&
-      (!storedPokemon || storedPokemon !== pokemonOfTheDay.id)
-    ) {
-      resetGame();
-      setCurrentPokemon(pokemonOfTheDay.id);
-    }
-  }, [pokemonOfTheDay, storedPokemon, resetGame, setCurrentPokemon]);
+  const tries = hints.length;
+  const hasLost = !hasWon && tries >= MAX_GUESSES;
+  const gameOver = hasWon || hasLost;
 
   return (
     <VStack
@@ -43,7 +39,7 @@ const GuessingGamePage = () => {
         numOfGuesses={hints.length}
         gameOver={gameOver}
       />
-      {hasWon || hasLost ? (
+      {gameOver ? (
         <CountdownTimer gameStatus={hasWon ? "won" : "lost"} />
       ) : (
         <GuessInput onSelect={submitGuess} />

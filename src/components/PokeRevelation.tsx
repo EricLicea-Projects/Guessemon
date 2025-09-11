@@ -4,7 +4,7 @@ import { usePokeRevelation } from "@/hooks/usePokeRevelation";
 import { PokeOfTheDay } from "@/hooks/useGetPokeOfDay";
 
 interface PokeRevelationProps {
-  pokemonOfTheDay: PokeOfTheDay | null;
+  pokemonOfTheDay: PokeOfTheDay | undefined;
   numOfGuesses: number;
   gameOver: boolean;
 }

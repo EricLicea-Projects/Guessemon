@@ -1,5 +1,7 @@
+import { useEffect } from "react";
 import apiClient from "@/services/api-client";
 import { useQuery } from "@tanstack/react-query";
+import useHintStore from "@/hooks/useHintStore";
 
 export interface PokeOfTheDay {
   id: number;
@@ -8,19 +10,29 @@ export interface PokeOfTheDay {
 }
 
 const useGetPokeOfDay = () => {
-  const query = useQuery({
+  const query = useQuery<PokeOfTheDay>({
     queryKey: ["pokemonOfTheDay"],
-    queryFn: () =>
+    queryFn: ({ signal }) =>
       apiClient
-        .get<PokeOfTheDay>("api/v1/pokemon_of_day")
+        .get<PokeOfTheDay>("/api/v1/pokemon_of_day", { signal })
         .then((res) => res.data),
-    initialData: null,
+
+    refetchOnMount: "always",
+    refetchOnWindowFocus: false,
+    refetchOnReconnect: true,
   });
 
-  return {
-    ...query,
-    pokemonOfTheDay: query.data,
-  };
+  useEffect(() => {
+    if (!query.data) return;
+
+    const hintStore = useHintStore.getState();
+    if (hintStore.currentPokemon !== query.data.id) {
+      hintStore.reset();
+      hintStore.setCurrentPokemon(query.data.id);
+    }
+  }, [query.data]);
+
+  return { ...query, pokemonOfTheDay: query.data };
 };
 
 export default useGetPokeOfDay;
