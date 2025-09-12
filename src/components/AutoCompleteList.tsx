@@ -1,17 +1,31 @@
 import { VStack, Box, Text, HStack, Image } from "@chakra-ui/react";
 import { Pokemon } from "@/data/pokemonData";
-import { usePokemonSuggestions } from "@/hooks/usePokemonSuggestions";
 
-interface Props {
-  guess: string;
-  data: Pokemon[];
-  onSelect: (value: Pokemon) => void;
+interface KeyboardWiring {
+  activeIndex: number;
+  getItemProps: (index: number) => {
+    id: string;
+    role: "option";
+    "aria-selected": boolean;
+    getRef: (el: HTMLElement | null) => void;
+    onMouseEnter: () => void;
+    onMouseDown: (e: React.MouseEvent) => void;
+  };
+  listProps: {
+    role: "listbox";
+    id: string;
+  };
 }
 
-const AutoCompleteList = ({ guess, data, onSelect }: Props) => {
-  const suggestions = usePokemonSuggestions(guess, data);
+interface Props {
+  suggestions: Pokemon[];
+  keyboard: KeyboardWiring;
+}
 
-  if (!guess || suggestions.length === 0) return null;
+const AutoCompleteList = ({ suggestions, keyboard }: Props) => {
+  if (suggestions.length === 0) return null;
+
+  const { activeIndex, getItemProps, listProps } = keyboard;
 
   return (
     <Box
@@ -24,31 +38,36 @@ const AutoCompleteList = ({ guess, data, onSelect }: Props) => {
       borderRadius="2xl"
       maxH="200px"
       overflowY="auto"
+      {...listProps}
     >
       <VStack spacing={1} align="stretch">
-        {suggestions.map((pokemon) => (
-          <HStack
-            key={pokemon.id}
-            p={2}
-            spacing={0}
-            borderBottom="1px solid"
-            borderColor="custom.primaryBorder"
-            _hover={{ bg: "custom.secondary", cursor: "pointer" }}
-            onMouseDown={(e) => {
-              e.preventDefault();
-              onSelect(pokemon);
-            }}
-          >
-            <Image
-              boxSize="60px"
-              src={`/assets/pokemon/${pokemon.id}.png`}
-              alt={pokemon.name}
-            />
-            <Text color="custom.text" fontSize="xl">
-              {pokemon.name}
-            </Text>
-          </HStack>
-        ))}
+        {suggestions.map((pokemon, i) => {
+          const { getRef, ...optionProps } = getItemProps(i);
+          const isActive = i === activeIndex;
+
+          return (
+            <HStack
+              key={pokemon.id}
+              p={2}
+              spacing={0}
+              borderBottom="1px solid"
+              borderColor="custom.primaryBorder"
+              _hover={{ bg: "custom.secondary", cursor: "pointer" }}
+              bg={isActive ? "custom.secondary" : undefined}
+              ref={getRef}
+              {...optionProps}
+            >
+              <Image
+                boxSize="60px"
+                src={`/assets/pokemon/${pokemon.id}.png`}
+                alt={pokemon.name}
+              />
+              <Text color="custom.text" fontSize="xl">
+                {pokemon.name}
+              </Text>
+            </HStack>
+          );
+        })}
       </VStack>
     </Box>
   );

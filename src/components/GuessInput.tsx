@@ -6,6 +6,8 @@ import ClearInputButton from "./ClearInputButton";
 import AutoCompleteList from "./AutoCompleteList";
 
 import { pokemonList, Pokemon } from "@/data/pokemonData";
+import { usePokemonSuggestions } from "@/hooks/usePokemonSuggestions";
+import { useAutocompleteKeyboard } from "@/hooks/useAutocompleteKeyboard";
 
 interface GuessInputProps {
   onSelect: (selected: Pokemon) => void;
@@ -19,6 +21,10 @@ const GuessInput = ({ onSelect }: GuessInputProps) => {
     onSelect(selected);
     setGuess("");
   };
+
+  const suggestions = usePokemonSuggestions(guess, pokemonList);
+
+  const kb = useAutocompleteKeyboard<Pokemon>(suggestions, handleSelection);
 
   return (
     <Box position="relative" width={{ base: "80%", md: "300px" }}>
@@ -56,15 +62,13 @@ const GuessInput = ({ onSelect }: GuessInputProps) => {
           borderColor="custom.primaryBorder"
           value={guess}
           onChange={(event) => setGuess(event.target.value)}
+          {...kb.inputAriaProps} // ← ArrowUp/Down/Home/End + Enter handled here
         />
         <InputRightElement top="50%" transform="translateY(-50%)">
           {guess && <ClearInputButton onClear={() => setGuess("")} />}
         </InputRightElement>
-        <AutoCompleteList
-          guess={guess}
-          data={pokemonList}
-          onSelect={handleSelection}
-        />
+
+        <AutoCompleteList suggestions={suggestions} keyboard={kb} />
       </InputGroup>
     </Box>
   );
