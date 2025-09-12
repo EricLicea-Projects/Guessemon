@@ -1,5 +1,6 @@
 import { VStack, Box, Text, HStack, Image } from "@chakra-ui/react";
 import { Pokemon } from "@/data/pokemonData";
+import { usePokemonSuggestions } from "@/hooks/usePokemonSuggestions";
 
 interface Props {
   guess: string;
@@ -8,15 +9,9 @@ interface Props {
 }
 
 const AutoCompleteList = ({ guess, data, onSelect }: Props) => {
-  const filteredSuggestions = guess.trim()
-    ? data.filter((pokemon) =>
-        pokemon.name.toLowerCase().includes(guess.toLowerCase())
-      )
-    : [];
+  const suggestions = usePokemonSuggestions(guess, data);
 
-  if (!guess || filteredSuggestions.length === 0) {
-    return null;
-  }
+  if (!guess || suggestions.length === 0) return null;
 
   return (
     <Box
@@ -31,7 +26,7 @@ const AutoCompleteList = ({ guess, data, onSelect }: Props) => {
       overflowY="auto"
     >
       <VStack spacing={1} align="stretch">
-        {filteredSuggestions.map((pokemon) => (
+        {suggestions.map((pokemon) => (
           <HStack
             key={pokemon.id}
             p={2}
@@ -39,7 +34,10 @@ const AutoCompleteList = ({ guess, data, onSelect }: Props) => {
             borderBottom="1px solid"
             borderColor="custom.primaryBorder"
             _hover={{ bg: "custom.secondary", cursor: "pointer" }}
-            onClick={() => onSelect(pokemon)}
+            onMouseDown={(e) => {
+              e.preventDefault();
+              onSelect(pokemon);
+            }}
           >
             <Image
               boxSize="60px"

@@ -28,6 +28,7 @@ const useGuessHandler = () => {
   });
 
   const submitGuess = (pokemon: Pokemon) => {
+    if (mutation.isPending) return;
     mutation.mutate(pokemon.id);
   };
 
