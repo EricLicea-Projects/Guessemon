@@ -9,23 +9,19 @@ interface PokeRevelationProps {
   gameOver: boolean;
 }
 
-const MotionBox = motion(Box);
-const MotionImage = motion(Image);
+const MotionBox = motion.create(Box);
+const MotionImage = motion.create(Image);
 
 const PokeRevelation = ({
   pokemonOfTheDay,
   numOfGuesses,
   gameOver,
 }: PokeRevelationProps) => {
-  const {
-    hasWon,
-    pokemonImg,
-    playCry,
-    animationProps,
-    borderBackground,
-    imageVariants,
-    imageAnimationState,
-  } = usePokeRevelation(pokemonOfTheDay, numOfGuesses, gameOver);
+  const { hasWon, pokemonImg, playCry, filterCss, ring } = usePokeRevelation(
+    pokemonOfTheDay,
+    numOfGuesses,
+    gameOver
+  );
 
   return (
     <MotionBox
@@ -44,12 +40,13 @@ const PokeRevelation = ({
           key={`border-${hasWon}`}
           boxSize="100%"
           borderRadius="full"
-          background={borderBackground}
+          background={ring.bg}
           zIndex={0}
           filter={{ base: "blur(0.6rem)", md: "blur(0.5rem)" }}
           opacity={0.8}
           animate="animate"
-          {...animationProps}
+          variants={ring.variants ? { animate: ring.variants } : undefined}
+          transition={ring.transition}
         />
       </Box>
       <Box
@@ -66,13 +63,14 @@ const PokeRevelation = ({
           boxSize="100%"
           objectFit="cover"
           onClick={playCry}
+          role="button"
+          aria-label="Play Pokemon Cry"
           cursor="pointer"
           draggable={false}
           onDragStart={(e) => e.preventDefault()}
           onContextMenu={(e) => e.preventDefault()}
-          variants={imageVariants}
-          initial="hidden"
-          animate={imageAnimationState}
+          initial={false}
+          animate={{ filter: filterCss }}
           transition={{ duration: 0.5, ease: "easeInOut" }}
           sx={{
             WebkitTapHighlightColor: "transparent",

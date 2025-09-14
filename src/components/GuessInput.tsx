@@ -62,7 +62,7 @@ const GuessInput = ({ onSelect }: GuessInputProps) => {
           borderColor="custom.primaryBorder"
           value={guess}
           onChange={(event) => setGuess(event.target.value)}
-          {...kb.inputAriaProps} // ← ArrowUp/Down/Home/End + Enter handled here
+          {...kb.inputAriaProps}
         />
         <InputRightElement top="50%" transform="translateY(-50%)">
           {guess && <ClearInputButton onClear={() => setGuess("")} />}

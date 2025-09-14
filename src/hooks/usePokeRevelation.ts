@@ -1,78 +1,79 @@
-import { useCallback, useMemo } from "react";
+import { useCallback, useEffect, useMemo, useRef } from "react";
+import { useReducedMotion } from "framer-motion";
 import useHintStore from "@/hooks/useHintStore";
+import type { PokeOfTheDay } from "@/hooks/useGetPokeOfDay";
 
-const spinVariants = {
-  animate: { rotate: 360 },
-};
-
-const pulseVariants = {
-  animate: { scale: [1, 1.05, 1] },
-};
+const SPIN = { rotate: 360 };
+const PULSE = { scale: [1, 1.05, 1] };
 
 export function usePokeRevelation(
-  pokemonOfTheDay: any,
+  pokemonOfTheDay: PokeOfTheDay | undefined,
   numOfGuesses: number,
   gameOver: boolean
 ) {
-  const hasWon = useHintStore((state) => state.correct);
+  const hasWon = useHintStore((s) => s.correct);
+  const prefersReduced = useReducedMotion();
 
-  const pokemonId = pokemonOfTheDay?.id ?? 0;
-  const DEFAULT_CRY_ID = 25;
-  const pokemonImg = `/assets/pokemon/${pokemonId}.png`;
-  const cryUrl = `/assets/cries/${pokemonOfTheDay?.id ?? DEFAULT_CRY_ID}.mp3`;
+  // Assets
+  const id = pokemonOfTheDay?.id ?? 0;
+  const imgSrc = `/assets/pokemon/${id}.png`;
 
-  const blurAmount = useMemo(
-    () => Math.max(1 - numOfGuesses * 0.1, 0.4),
-    [numOfGuesses]
-  );
+  // ♫ Audio
+  const cryId = pokemonOfTheDay?.id ?? 25; // Pikachu fallback if no data
+  const audioRef = useRef<HTMLAudioElement | null>(null);
+
+  useEffect(() => {
+    audioRef.current?.pause();
+    audioRef.current = new Audio(`/assets/cries/${cryId}.mp3`);
+  }, [cryId]);
 
   const playCry = useCallback(() => {
-    new Audio(cryUrl).play();
-  }, [cryUrl]);
+    const a = audioRef.current;
+    if (!a) return;
+    a.currentTime = 0;
+    void a.play();
+  }, []);
 
-  const animationProps = useMemo(
+  // Blur logic: step down by 0.1rem per guess, floor at 0.4 while playing,
+  // and 0 when the game is over.
+  const blurRem = useMemo(() => {
+    const stepped = Math.max(1 - numOfGuesses * 0.1, 0);
+    return gameOver ? 0 : Math.max(stepped, 0.4);
+  }, [numOfGuesses, gameOver]);
+
+  const filterCss = useMemo(
     () =>
-      hasWon
-        ? {
-            variants: spinVariants,
-            transition: { duration: 2, ease: "linear", repeat: Infinity },
-          }
-        : {
-            variants: pulseVariants,
-            transition: { duration: 2, ease: "easeInOut", repeat: Infinity },
-          },
-    [hasWon]
+      blurRem > 0 ? `brightness(0) invert(1) blur(${blurRem}rem)` : "none",
+    [blurRem]
   );
 
-  const borderBackground = useMemo(
-    () =>
-      hasWon
-        ? "conic-gradient(from 0deg, red, orange, yellow, green, blue, indigo, violet)"
-        : "conic-gradient(from 0deg, rgb(92, 82, 182), rgb(212, 52, 204), rgb(92, 82, 182), rgb(212, 52, 204))",
-    [hasWon]
-  );
+  // Ring background + animation profile (pulse while guessing, spin on win)
+  const ring = useMemo(() => {
+    const bg = hasWon
+      ? "conic-gradient(from 0deg, red, orange, yellow, green, blue, indigo, violet)"
+      : "conic-gradient(from 0deg, rgb(92,82,182), rgb(212,52,204), rgb(92,82,182), rgb(212,52,204))";
 
-  const imageVariants = useMemo(
-    () => ({
-      hidden: {
-        filter: `brightness(0) saturate(100%) invert(1) blur(${blurAmount}rem)`,
-      },
-      revealed: {
-        filter: "brightness(1) saturate(1) invert(0) blur(0)",
-      },
-    }),
-    [blurAmount]
-  );
-
-  const imageAnimationState = gameOver ? "revealed" : "hidden";
+    if (prefersReduced) {
+      return { bg, variants: undefined, transition: undefined };
+    }
+    return hasWon
+      ? {
+          bg,
+          variants: SPIN,
+          transition: { duration: 2, ease: "linear", repeat: Infinity },
+        }
+      : {
+          bg,
+          variants: PULSE,
+          transition: { duration: 2, ease: "easeInOut", repeat: Infinity },
+        };
+  }, [hasWon, prefersReduced]);
 
   return {
     hasWon,
-    pokemonImg,
+    pokemonImg: imgSrc,
     playCry,
-    animationProps,
-    borderBackground,
-    imageVariants,
-    imageAnimationState,
+    filterCss,
+    ring,
   };
 }
