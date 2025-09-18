@@ -1,7 +1,7 @@
 import { VStack } from "@chakra-ui/react";
 import { useShallow } from "zustand/shallow";
 
-import HintCard from "@/components/HintCard";
+import HintCard from "@/components/hintCard/HintCard";
 import GuessInput from "../components/GuessInput";
 import CountdownTimer from "@/components/CountdownTimer";
 import PokeRevelation from "@/components/PokeRevelation";
