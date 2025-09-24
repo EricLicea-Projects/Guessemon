@@ -34,14 +34,20 @@ const HintCardContent = memo(({ hint }: Props) => {
         spacing={0}
       >
         <HStack
-          p={1.5}
+          p={2}
           w="100%"
           borderBottom="2px dotted"
           borderColor="red.300"
           align="center"
           justify="space-between"
         >
-          <Text color="red.300" fontSize="sm" noOfLines={1} isTruncated>
+          <Text
+            color="red.300"
+            width={{ base: "110px", md: "auto" }}
+            fontSize={{ base: "xs", md: "sm" }}
+            noOfLines={1}
+            isTruncated
+          >
             {name}
           </Text>
           <HintCardTypes types={hint.types} />

@@ -7,7 +7,6 @@ const MotionBox = motion.create(Box);
 type Props = {
   label: string;
   isOn?: boolean;
-  minW?: string | number;
   showDot?: boolean;
   dotColor?: string;
   showShape?: boolean;
@@ -23,7 +22,6 @@ const HintChip = memo(
   ({
     label,
     isOn = false,
-    minW = "112px",
     showDot = false,
     dotColor,
     showShape = false,
@@ -35,9 +33,8 @@ const HintChip = memo(
       <MotionBox
         role="group"
         position="relative"
-        px={3}
-        py={1.5}
-        minW={minW}
+        px={{ base: 2, sm: 3 }}
+        py={{ base: 1, sm: 1.5 }}
         rounded="2xl"
         border="3px solid"
         borderColor={DEFAULT_OFF}
@@ -69,10 +66,10 @@ const HintChip = memo(
           },
         }}
       >
-        <HStack spacing={2} align="center">
+        <HStack spacing={{ base: 1, sm: 2 }} align="center">
           <Text
-            fontSize="md"
-            fontWeight="700"
+            fontSize={{ base: "xs", sm: "md" }}
+            fontWeight="600"
             letterSpacing="wide"
             userSelect="none"
             noOfLines={1}
