@@ -1,11 +1,11 @@
 import { HStack, Image } from "@chakra-ui/react";
 import { TypesHint } from "@/hooks/useHintStore";
 
-interface HintCardTypesProps {
+type Props = {
   types: TypesHint;
-}
+};
 
-const HintCardTypes = ({ types }: HintCardTypesProps) => {
+const HintCardTypes = ({ types }: Props) => {
   const { shared, guess, guess_single, both_single } = types;
   const typeOneImg = `/assets/types/${guess[0]}.png`;
   const typeTwoImg = `/assets/types/${guess_single ? "none" : guess[1]}.png`;

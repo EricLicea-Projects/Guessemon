@@ -19,18 +19,6 @@ const colors = {
     wrong: "#ff2e6d",
     text: "#0094C6",
   },
-  hintColor: {
-    black: "#121212",
-    blue: "#0008a1",
-    brown: "#452d14",
-    gray: "#575757",
-    green: "#00700d",
-    pink: "#ffaddd",
-    purple: "#6d0075",
-    red: "#570000",
-    white: "#ffffff",
-    yellow: "#ffe600",
-  },
 };
 
 const fonts = {
