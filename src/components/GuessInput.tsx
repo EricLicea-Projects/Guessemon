@@ -1,5 +1,5 @@
+import { useRef, useState } from "react";
 import { Box, Input, InputGroup, InputRightElement } from "@chakra-ui/react";
-import { useState } from "react";
 
 import Pokedex from "./Pokedex";
 import ClearInputButton from "./ClearInputButton";
@@ -15,8 +15,17 @@ interface GuessInputProps {
 
 const GuessInput = ({ onSelect }: GuessInputProps) => {
   const [guess, setGuess] = useState<string>("");
+  const inputRef = useRef<HTMLInputElement>(null);
+
+  const blurInput = () => {
+    const el = inputRef.current;
+    if (!el) return;
+    el.blur();
+    setTimeout(() => el.blur(), 0);
+  };
 
   const handleSelection = (selected: Pokemon) => {
+    blurInput();
     setGuess(selected.name);
     onSelect(selected);
     setGuess("");
@@ -39,6 +48,9 @@ const GuessInput = ({ onSelect }: GuessInputProps) => {
       </Box>
       <InputGroup zIndex="1">
         <Input
+          ref={inputRef}
+          enterKeyHint="go"
+          autoCorrect="off"
           variant="outline"
           size={{ base: "md", lg: "md" }}
           bg="custom.primaryLight"

@@ -1,7 +1,7 @@
 import { VStack, Box, Text, HStack, Image } from "@chakra-ui/react";
 import { Pokemon } from "@/data/pokemonData";
 
-interface KeyboardWiring {
+type KeyboardWiring = {
   activeIndex: number;
   getItemProps: (index: number) => {
     id: string;
@@ -15,12 +15,12 @@ interface KeyboardWiring {
     role: "listbox";
     id: string;
   };
-}
+};
 
-interface Props {
+type Props = {
   suggestions: Pokemon[];
   keyboard: KeyboardWiring;
-}
+};
 
 const AutoCompleteList = ({ suggestions, keyboard }: Props) => {
   if (suggestions.length === 0) return null;
