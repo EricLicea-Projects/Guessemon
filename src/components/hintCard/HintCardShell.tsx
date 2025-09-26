@@ -5,6 +5,7 @@ const HintCardShell = ({ children }: { children: React.ReactNode }) => {
     <MotionVStack
       width={CARD_WIDTH}
       height={CARD_HEIGHT}
+      overflow="hidden"
       position="relative"
       bgGradient="linear-gradient(180deg, #0E0F1A 0%, #0A0C16 100%)"
       border="3px solid transparent"

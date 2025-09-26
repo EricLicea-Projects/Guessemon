@@ -1,14 +1,24 @@
 import HintCardShell from "./HintCardShell";
 import HintCardPlaceholder from "./HintCardPlaceholder";
 import HintCardContent from "./HintCardContent";
-import { useSelectedHint } from "../../hooks/useSelectedHint";
+import { AnimatePresence } from "framer-motion";
 
-const HintCard = () => {
-  const hint = useSelectedHint();
+import type { Hints } from "@/hooks/useHintStore";
 
+type Props = {
+  hint?: Hints | null;
+};
+
+const HintCard = ({ hint }: Props) => {
   return (
     <HintCardShell>
-      {hint ? <HintCardContent hint={hint} /> : <HintCardPlaceholder />}
+      <AnimatePresence mode="wait" initial={false}>
+        {hint ? (
+          <HintCardContent key={`hint-${hint.id}`} hint={hint} />
+        ) : (
+          <HintCardPlaceholder key="placeholder" />
+        )}
+      </AnimatePresence>
     </HintCardShell>
   );
 };
