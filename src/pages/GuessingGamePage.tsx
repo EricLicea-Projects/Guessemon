@@ -33,7 +33,7 @@ const GuessingGamePage = () => {
 
   return (
     <HStack p={0} w="100%" justify="space-evenly">
-      <VStack spacing={{ base: 4, md: 5, lg: 6 }}>
+      <VStack spacing={{ base: 4, md: 5, lg: 6 }} w="100%">
         <PokeRevelation
           pokemonOfTheDay={pokemonOfTheDay}
           numOfGuesses={hints.length}
