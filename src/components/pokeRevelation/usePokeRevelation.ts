@@ -1,10 +1,15 @@
-import { useCallback, useEffect, useMemo, useRef } from "react";
+import { useMemo } from "react";
 import { useReducedMotion } from "framer-motion";
 import useHintStore from "@/hooks/useHintStore";
 import type { PokeOfTheDay } from "@/hooks/useGetPokeOfDay";
 
-const SPIN = { rotate: 360 };
-const PULSE = { scale: [1, 1.05, 1] };
+const SPIN_POP = { rotate: 360, scale: 1.1 };
+const PULSE = { scale: [0.98, 1.01, 0.98] };
+
+const TEAL_RING =
+  "radial-gradient(circle at 50% 55%, rgba(0, 255, 221, 1) 0 34%, rgba(0, 224, 194, 1) 55%)";
+const GOLD_RING =
+  "radial-gradient(circle at 50% 55%, rgba(253,230,138,0.38) 0 34%, rgba(245, 159, 11, 0.48) 34%, rgba(0,0,0,0) 79%)";
 
 export function usePokeRevelation(
   pokemonOfTheDay: PokeOfTheDay | undefined,
@@ -17,22 +22,6 @@ export function usePokeRevelation(
   // Assets
   const id = pokemonOfTheDay?.id ?? 0;
   const imgSrc = `/assets/pokemon/${id}.png`;
-
-  // ♫ Audio
-  const cryId = pokemonOfTheDay?.id ?? 25; // Pikachu fallback if no data
-  const audioRef = useRef<HTMLAudioElement | null>(null);
-
-  useEffect(() => {
-    audioRef.current?.pause();
-    audioRef.current = new Audio(`/assets/cries/${cryId}.mp3`);
-  }, [cryId]);
-
-  const playCry = useCallback(() => {
-    const a = audioRef.current;
-    if (!a) return;
-    a.currentTime = 0;
-    void a.play();
-  }, []);
 
   // Blur logic: step down by 0.1rem per guess, floor at 0.4 while playing,
   // and 0 when the game is over.
@@ -49,9 +38,7 @@ export function usePokeRevelation(
 
   // Ring background + animation profile (pulse while guessing, spin on win)
   const ring = useMemo(() => {
-    const bg = hasWon
-      ? "conic-gradient(from 0deg, red, orange, yellow, green, blue, indigo, violet)"
-      : "conic-gradient(from 0deg, rgb(92,82,182), rgb(212,52,204), rgb(92,82,182), rgb(212,52,204))";
+    const bg = hasWon ? GOLD_RING : TEAL_RING;
 
     if (prefersReduced) {
       return { bg, variants: undefined, transition: undefined };
@@ -59,8 +46,11 @@ export function usePokeRevelation(
     return hasWon
       ? {
           bg,
-          variants: SPIN,
-          transition: { duration: 2, ease: "linear", repeat: Infinity },
+          variants: SPIN_POP,
+          transition: {
+            rotate: { duration: 1, ease: "linear", repeat: Infinity },
+            scale: { duration: 0.3, ease: "easeOut" },
+          },
         }
       : {
           bg,
@@ -72,7 +62,6 @@ export function usePokeRevelation(
   return {
     hasWon,
     pokemonImg: imgSrc,
-    playCry,
     filterCss,
     ring,
   };

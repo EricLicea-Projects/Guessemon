@@ -6,45 +6,49 @@ import aboutIcon from "../assets/about.svg";
 import resetIcon from "../assets/reset.svg";
 import useHintStore from "@/hooks/useHintStore";
 
-interface SidebarProps {
+type Props = {
   onLinkClick?: () => void;
-}
+};
 
-const Sidebar = ({ onLinkClick }: SidebarProps) => {
+const Sidebar = ({ onLinkClick }: Props) => {
   const resetGame = useHintStore((state) => state.reset);
 
   const links = [
     { name: "Home", to: "/", icon: homeIcon },
     { name: "About", to: "/about", icon: aboutIcon },
+    { name: "Reset", to: "/", icon: resetIcon },
   ];
+
+  const onResetClick = () => {
+    resetGame();
+    onLinkClick?.();
+  };
 
   return (
     <VStack
+      layerStyle="pokeBallFrame"
+      border="none"
       boxSize="100%"
       align="stretch"
       spacing={0}
       borderRight="1px solid"
-      borderColor="custom.primaryBorder"
+      borderColor="borderColor"
     >
       {links.map((link) => (
         <HStack
           as={RouterLink}
-          key={link.to}
+          key={link.name}
           to={link.to}
-          sx={{ WebkitTapHighlightColor: "transparent" }}
           w="100%"
           py={3}
           px={2}
           borderBottom="1px solid"
-          borderColor="custom.primaryBorder"
-          _hover={{
-            bg: "custom.secondary",
-            textDecoration: "none",
-          }}
+          borderColor="borderColor"
+          _hover={{ bg: "highlight" }}
           justify="flex-start"
           align="center"
           role="group"
-          onClick={onLinkClick}
+          onClick={link.name === "Reset" ? onResetClick : onLinkClick}
         >
           <HStack
             transition="transform 0.2s"
@@ -53,43 +57,12 @@ const Sidebar = ({ onLinkClick }: SidebarProps) => {
             {link.icon && (
               <Image src={link.icon} alt={`${link.name} Icon`} boxSize="50px" />
             )}
-            <Text mx={3} fontSize="lg" color="custom.text">
+            <Text mx={3} fontSize="lg">
               {link.name}
             </Text>
           </HStack>
         </HStack>
       ))}
-      {/* This is temporary reset button.*/}
-      <HStack
-        onClick={resetGame}
-        cursor="pointer"
-        sx={{ WebkitTapHighlightColor: "transparent" }}
-        w="100%"
-        py={3}
-        px={2}
-        borderBottom="1px solid"
-        borderColor="custom.primaryBorder"
-        fontWeight="bold"
-        fontSize="lg"
-        fontFamily='"Press Start 2P", cursive'
-        _hover={{
-          bg: "custom.secondary",
-          textDecoration: "none",
-        }}
-        justify="flex-start"
-        align="center"
-        spacing={1}
-        role="group"
-      >
-        <HStack
-          color="custom.text"
-          transition="transform 0.2s"
-          _groupHover={{ transform: "scale(1.1)" }}
-        >
-          <Image src={resetIcon} boxSize="50px" />
-          <Text mx={3}>Reset</Text>
-        </HStack>
-      </HStack>
     </VStack>
   );
 };

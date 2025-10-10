@@ -1,7 +1,7 @@
 import { useRef, useState } from "react";
 import { Box, Input, InputGroup, InputRightElement } from "@chakra-ui/react";
 
-import Pokedex from "./Pokedex";
+import Pokedex from "./pokedex/Pokedex";
 import ClearInputButton from "./ClearInputButton";
 import AutoCompleteList from "./AutoCompleteList";
 
@@ -9,11 +9,12 @@ import { pokemonList, Pokemon } from "@/data/pokemonData";
 import { usePokemonSuggestions } from "@/hooks/usePokemonSuggestions";
 import { useAutocompleteKeyboard } from "@/hooks/useAutocompleteKeyboard";
 
-interface GuessInputProps {
+type Props = {
   onSelect: (selected: Pokemon) => void;
-}
+  isMobile: boolean;
+};
 
-const GuessInput = ({ onSelect }: GuessInputProps) => {
+const GuessInput = ({ onSelect, isMobile }: Props) => {
   const [guess, setGuess] = useState<string>("");
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -32,54 +33,56 @@ const GuessInput = ({ onSelect }: GuessInputProps) => {
   };
 
   const suggestions = usePokemonSuggestions(guess, pokemonList);
-
   const kb = useAutocompleteKeyboard<Pokemon>(suggestions, handleSelection);
 
   return (
     <Box position="relative" width={{ base: "80%", md: "300px" }}>
-      <Box
-        position="absolute"
-        left="-35px"
-        top="50%"
-        transform="translateY(-70%)"
-        zIndex="2"
-      >
-        <Pokedex />
-      </Box>
+      {isMobile && (
+        <Box
+          position="absolute"
+          left="-35px"
+          top="50%"
+          transform="translateY(-70%)"
+          zIndex="2"
+        >
+          <Pokedex />
+        </Box>
+      )}
       <InputGroup zIndex="1">
         <Input
           ref={inputRef}
-          enterKeyHint="go"
-          autoCorrect="off"
+          value={guess}
+          layerStyle="pokeBallFrame"
           variant="outline"
-          size={{ base: "md", lg: "md" }}
-          bg="custom.primaryLight"
-          color="custom.text"
-          fontSize={{ base: "md", lg: "md" }}
+          border="3px double"
+          borderColor="inputBoxColor"
+          borderRadius="3xl"
           textAlign="center"
           placeholder="Guess"
           _placeholder={{
-            transform: "translateX(10px)",
-            color: "custom.text",
-            opacity: 0.6,
+            fontSize: "sm",
+            transform: { base: "translateX(0px)", xl: "translate(10px)" },
+            color: "textColor",
+            opacity: 0.7,
+            transition: "opacity .3s ease",
           }}
-          _hover={{ bg: "custom.secondary" }}
           _focus={{
-            bg: "custom.secondary",
-            borderColor: "custom.primaryBorder",
+            borderColor: "focusColor",
             _placeholder: { opacity: 0 },
           }}
-          transform="translateX(10px)"
-          borderRadius="3xl"
-          borderColor="custom.primaryBorder"
-          value={guess}
+          _hover={{
+            borderColor: "focusColor",
+          }}
+          transition="border-color .5s ease"
+          transform={{ base: "translateX(10px)", xl: "translate(0px)" }}
           onChange={(event) => setGuess(event.target.value)}
+          enterKeyHint="go"
+          autoCorrect="off"
           {...kb.inputAriaProps}
         />
         <InputRightElement top="50%" transform="translateY(-50%)">
           {guess && <ClearInputButton onClear={() => setGuess("")} />}
         </InputRightElement>
-
         <AutoCompleteList suggestions={suggestions} keyboard={kb} />
       </InputGroup>
     </Box>

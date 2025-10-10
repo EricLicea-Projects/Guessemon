@@ -15,12 +15,7 @@ const PokeballHintGrid = () => {
   });
 
   return (
-    <Grid
-      templateColumns="repeat(3, 1fr)"
-      gap={0}
-      border="4px solid"
-      borderColor="custom.primaryBorder"
-    >
+    <Grid layerStyle="pokeBallFrame" templateColumns="repeat(3, 1fr)" gap={0}>
       {images.map((src, index) => {
         const isRightEdge = (index + 1) % 3 === 0;
         const isBottomEdge = index >= 3;
@@ -31,11 +26,11 @@ const PokeballHintGrid = () => {
             key={index}
             p={3}
             cursor="pointer"
-            bg={isSelected ? "custom.secondary" : "custom.primaryLight"}
+            bg={isSelected ? "highlight" : "none"}
             borderRight={!isRightEdge ? "3px solid" : "none"}
             borderBottom={!isBottomEdge ? "3px solid" : "none"}
             borderColor="custom.primaryBorder"
-            _hover={{ bg: "custom.secondary" }}
+            _hover={{ bg: "highlight" }}
             sx={{ WebkitTapHighlightColor: "transparent" }}
             onClick={() => setSelectedHintIndex(index)}
             role="group"

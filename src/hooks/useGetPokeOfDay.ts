@@ -7,6 +7,8 @@ export interface PokeOfTheDay {
   id: number;
   name: string;
   flavor_text: string;
+  height: number;
+  weight: number;
 }
 
 const useGetPokeOfDay = () => {

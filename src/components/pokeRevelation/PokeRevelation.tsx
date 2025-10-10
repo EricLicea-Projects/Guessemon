@@ -1,6 +1,6 @@
 import { Box, Image } from "@chakra-ui/react";
 import { motion } from "framer-motion";
-import { usePokeRevelation } from "@/hooks/usePokeRevelation";
+import { usePokeRevelation } from "./usePokeRevelation";
 import { PokeOfTheDay } from "@/hooks/useGetPokeOfDay";
 
 interface PokeRevelationProps {
@@ -12,23 +12,22 @@ interface PokeRevelationProps {
 const MotionBox = motion.create(Box);
 const MotionImage = motion.create(Image);
 
+const TEAL = "rgba(0, 255, 221, 0.5)";
+const GOLD = "rgba(8, 8, 2, 0.55)";
+
 const PokeRevelation = ({
   pokemonOfTheDay,
   numOfGuesses,
   gameOver,
 }: PokeRevelationProps) => {
-  const { hasWon, pokemonImg, playCry, filterCss, ring } = usePokeRevelation(
+  const { hasWon, pokemonImg, filterCss, ring } = usePokeRevelation(
     pokemonOfTheDay,
     numOfGuesses,
     gameOver
   );
 
   return (
-    <MotionBox
-      position="relative"
-      boxSize={{ base: "150px", md: "200px" }}
-      whileTap={{ scale: 0.95 }}
-    >
+    <MotionBox position="relative" boxSize={{ base: "150px", md: "200px" }}>
       <Box
         position="absolute"
         top="50%"
@@ -50,11 +49,12 @@ const PokeRevelation = ({
         />
       </Box>
       <Box
+        layerStyle="pokeBallFrame"
         position="relative"
         boxSize="100%"
         borderRadius="full"
+        border={`4px double ${hasWon ? GOLD : TEAL}`}
         overflow="hidden"
-        bgGradient="linear(to-t,custom.primaryLight ,custom.primary)"
         zIndex={1}
       >
         <MotionImage
@@ -62,10 +62,6 @@ const PokeRevelation = ({
           alt="Mystery Pokémon"
           boxSize="100%"
           objectFit="cover"
-          onClick={playCry}
-          role="button"
-          aria-label="Play Pokemon Cry"
-          cursor="pointer"
           draggable={false}
           onDragStart={(e) => e.preventDefault()}
           onContextMenu={(e) => e.preventDefault()}

@@ -11,7 +11,7 @@ const ClearInputButton = ({ onClear }: ClearInputButtonProps) => {
       isRound={true}
       variant="filled"
       size="sm"
-      color="custom.secondaryLight"
+      color="rgba(0, 255, 221, 1)"
       aria-label="Clear Input"
       icon={<CloseIcon />}
       onClick={onClear}

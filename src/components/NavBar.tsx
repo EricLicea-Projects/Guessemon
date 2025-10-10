@@ -22,12 +22,12 @@ const NavBar = () => {
   return (
     <>
       <Flex
-        bg="custom.primaryLight"
+        layerStyle="pokeBallFrame"
         h="75px"
         px={2}
-        color="custom.text"
+        border="none"
         borderBottom="1px solid"
-        borderColor="custom.primaryBorder"
+        borderColor="borderColor"
         align="center"
         justify={{ base: "center", xl: "flex-start" }}
       >
@@ -36,12 +36,10 @@ const NavBar = () => {
           aria-label="Open menu"
           variant="ghost"
           icon={<HamburgerIcon boxSize="25px" />}
-          color="custom.text"
           position="absolute"
           left="0.5rem"
           onClick={onOpen}
         />
-
         <HStack spacing={0}>
           <Image
             display={{ base: "none", xl: "block" }}
@@ -60,16 +58,12 @@ const NavBar = () => {
         isOpen={isOpen}
         size={{ base: "full", lg: "xs" }}
       >
-        <DrawerOverlay bg="rgba(0, 0, 0, 0.85)" />
-        <DrawerContent bg="transparent">
-          <DrawerCloseButton
-            color="custom.text"
-            size="lg"
-            top="0.7rem"
-            right="0.4rem"
-          />
+        <DrawerOverlay />
+        <DrawerContent>
+          <DrawerCloseButton size="lg" top="0.7rem" right="0.4rem" />
           <DrawerHeader
-            color="custom.text"
+            bg="blackAlpha.700"
+            border="none"
             borderBottom="1px solid"
             borderRight="1px solid"
           >

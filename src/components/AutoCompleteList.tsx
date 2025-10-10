@@ -29,15 +29,22 @@ const AutoCompleteList = ({ suggestions, keyboard }: Props) => {
 
   return (
     <Box
-      bg="custom.primaryLight"
       position="absolute"
+      layerStyle="pokeBallFrame"
+      border="none"
       top="100%"
-      left="0"
+      left="2"
       right="0"
       zIndex="1000"
-      borderRadius="2xl"
+      borderRadius="lg"
       maxH="200px"
       overflowY="auto"
+      sx={{
+        scrollbarGutter: "stable",
+        scrollbarWidth: "thin",
+        scrollbarColor: "var(--chakra-colors-teal-400) rgba(255,255,255,0.06)",
+        overscrollBehavior: "contain",
+      }}
       {...listProps}
     >
       <VStack spacing={1} align="stretch">
@@ -50,10 +57,9 @@ const AutoCompleteList = ({ suggestions, keyboard }: Props) => {
               key={pokemon.id}
               p={2}
               spacing={0}
-              borderBottom="1px solid"
-              borderColor="custom.primaryBorder"
-              _hover={{ bg: "custom.secondary", cursor: "pointer" }}
-              bg={isActive ? "custom.secondary" : undefined}
+              borderBottom="1px solid teal"
+              _hover={{ bg: "highlight", cursor: "pointer" }}
+              bg={isActive ? "highlight" : undefined}
               ref={getRef}
               {...optionProps}
             >
@@ -62,9 +68,7 @@ const AutoCompleteList = ({ suggestions, keyboard }: Props) => {
                 src={`/assets/pokemon/${pokemon.id}.png`}
                 alt={pokemon.name}
               />
-              <Text color="custom.text" fontSize="xl">
-                {pokemon.name}
-              </Text>
+              <Text fontSize="xl">{pokemon.name}</Text>
             </HStack>
           );
         })}

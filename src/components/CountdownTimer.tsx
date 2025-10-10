@@ -39,7 +39,7 @@ const CountdownTimer = ({ gameStatus }: CountdownTimerProps) => {
 
   const [timeLeft, setTimeLeft] = useState(calculateTimeLeft());
 
-  const topMessage = gameStatus === "won" ? "Congrats!" : "Out of Pokéballs!";
+  const topMessage = gameStatus === "won" ? "Congrats!" : "Black out...!";
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -53,17 +53,13 @@ const CountdownTimer = ({ gameStatus }: CountdownTimerProps) => {
 
   return (
     <VStack
+      layerStyle="pokeBallFrame"
       p={1}
       spacing={1}
-      width={{ base: "90%", lg: "350px" }}
-      bg="custom.primaryLight"
-      color="custom.text"
-      borderRadius="2xl"
-      border="3px solid"
-      borderColor="custom.primaryBorder"
+      width={{ base: "95%", lg: "350px" }}
     >
       <Text fontSize="sm">{topMessage}</Text>
-      <Text fontSize="sm">Next Pokémon in</Text>
+      <Text fontSize="xs">Next Pokémon arrives in</Text>
       <Text fontSize="md">
         {formatTime(timeLeft.hours)}:{formatTime(timeLeft.minutes)}:
         {formatTime(timeLeft.seconds)}
