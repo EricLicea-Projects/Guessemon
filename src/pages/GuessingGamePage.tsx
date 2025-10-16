@@ -35,7 +35,7 @@ const GuessingGamePage = () => {
     <HStack p={isMobile ? 0 : 3} w="100%" justify="space-evenly">
       {!isMobile && <HintStack start={0} />}
       <VStack
-        spacing={{ base: 4, md: 5, lg: 6 }}
+        spacing={{ base: hasWon ? 4 : 6, md: 8, lg: 16 }}
         w={{ base: "100%", xl: "auto" }}
       >
         <PokeRevelation

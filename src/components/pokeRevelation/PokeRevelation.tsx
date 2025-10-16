@@ -27,7 +27,7 @@ const PokeRevelation = ({
   );
 
   return (
-    <MotionBox position="relative" boxSize={{ base: "150px", md: "200px" }}>
+    <MotionBox position="relative" boxSize={{ base: "160px", md: "200px" }}>
       <Box
         position="absolute"
         top="50%"
@@ -68,11 +68,6 @@ const PokeRevelation = ({
           initial={false}
           animate={{ filter: filterCss }}
           transition={{ duration: 0.5, ease: "easeInOut" }}
-          sx={{
-            WebkitTapHighlightColor: "transparent",
-            userSelect: "none",
-            WebkitTouchCallout: "none",
-          }}
         />
       </Box>
     </MotionBox>

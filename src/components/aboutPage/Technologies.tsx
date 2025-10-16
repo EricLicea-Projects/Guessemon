@@ -22,30 +22,22 @@ const techStack = [
 
 const Technologies = () => {
   return (
-    <Box
-      width={{ base: "100%" }}
-      border="4px solid"
-      borderColor="custom.primaryBorder"
-      borderRadius="lg"
-      boxShadow="md"
-      bg="custom.primaryLight"
-    >
+    <Box layerStyle="pokeBallFrame" width="100%" boxShadow="md">
       <Heading
         as="h1"
-        p={2}
+        p={3}
         width="100%"
         size="sm"
         textAlign="center"
-        color="custom.text"
-        borderBottom="1px solid"
+        borderBottom="3px dotted"
       >
         Technologies Used
       </Heading>
-      <SimpleGrid columns={{ base: 2, md: 2 }} spacing={2} p={2}>
+      <SimpleGrid columns={{ base: 2, md: 2 }} spacing={3} p={3}>
         {techStack.map((tech) => {
           const IconComponent = tech.icon;
           return (
-            <HStack key={tech.name} textAlign="center" color="custom.text">
+            <HStack key={tech.name} textAlign="center">
               <IconComponent size="40px" color={tech.color} />
               <Text fontSize="xs">{tech.name}</Text>
             </HStack>

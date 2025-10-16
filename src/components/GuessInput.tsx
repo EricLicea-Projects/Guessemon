@@ -68,12 +68,13 @@ const GuessInput = ({ onSelect, isMobile }: Props) => {
           }}
           _focus={{
             borderColor: "focusColor",
+            boxShadow:
+              "0 0 0 1px var(--chakra-colors-focusColor), 0 0 6px var(--chakra-colors-focusColor), 0 0 14px var(--chakra-colors-focusColor)",
             _placeholder: { opacity: 0 },
+            outline: "none",
           }}
-          _hover={{
-            borderColor: "focusColor",
-          }}
-          transition="border-color .5s ease"
+          _hover={{ borderColor: "focusColor" }}
+          transition="border-color .5s ease, box-shadow .5s ease"
           transform={{ base: "translateX(10px)", xl: "translate(0px)" }}
           onChange={(event) => setGuess(event.target.value)}
           enterKeyHint="go"

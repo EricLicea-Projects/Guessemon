@@ -32,9 +32,9 @@ const Layout = () => {
         area="main"
         display="flex"
         justifyContent="center"
-        alignItems="center"
         position="relative"
         bgGradient="linear-gradient(180deg, #0d0b0f 60%, #11081a 100%)"
+        overflowY="auto"
         _before={{
           content: '""',
           position: "absolute",

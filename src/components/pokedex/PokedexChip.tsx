@@ -21,7 +21,6 @@ const PokedexChip = ({ variant, value = 0 }: Props) => {
       align="center"
       whiteSpace="nowrap"
       aria-label={`${variant} ${value}`}
-      color="custom.text"
     >
       <Icon as={IconComp} boxSize="20px" aria-hidden />
       <Text fontSize="12px" lineHeight="1" aria-hidden mt={1}>

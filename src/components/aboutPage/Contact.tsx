@@ -9,7 +9,7 @@ import {
 import { EmailIcon } from "@chakra-ui/icons";
 import { FaLinkedin } from "react-icons/fa";
 
-const CallToAction = () => {
+const Contact = () => {
   const emailIconSize = useBreakpointValue({ base: "16px", md: "20px" });
   const linkedinIconSize = useBreakpointValue({ base: "16px", md: "20px" });
 
@@ -31,22 +31,13 @@ const CallToAction = () => {
   ];
 
   return (
-    <Box
-      border="4px solid"
-      borderColor="custom.primaryBorder"
-      borderRadius="lg"
-      boxShadow="md"
-      bg="custom.primaryLight"
-      p={2}
-    >
+    <Box layerStyle="pokeBallFrame" w="100%" boxShadow="md" p={2}>
       <Heading
         as="h1"
+        pb={2}
         size="sm"
         textAlign="center"
-        color="custom.text"
-        borderBottom="1px solid"
-        borderColor="custom.primaryBorder"
-        mb={4}
+        borderBottom="3px dotted"
       >
         Contact
       </Heading>
@@ -54,7 +45,7 @@ const CallToAction = () => {
         <HStack
           key={index}
           spacing={2}
-          mt={index > 0 ? 2 : 0}
+          mt={3}
           alignItems="center"
           justify="left"
         >
@@ -64,11 +55,7 @@ const CallToAction = () => {
             _hover={{ textDecoration: "none", color: "teal.200" }}
             aria-label={ariaLabel}
           >
-            <HStack
-              spacing={1}
-              alignItems="center"
-              color="custom.secondaryLight"
-            >
+            <HStack spacing={3} alignItems="center">
               {Icon === EmailIcon ? (
                 <Icon boxSize={iconSize} mt="1px" />
               ) : (
@@ -76,7 +63,6 @@ const CallToAction = () => {
               )}
               <Text
                 fontSize={{ base: "xs", md: "md" }}
-                color="custom.text"
                 mt={0.5}
                 _hover={{ textDecoration: "none", color: "teal.200" }}
               >
@@ -90,4 +76,4 @@ const CallToAction = () => {
   );
 };
 
-export default CallToAction;
+export default Contact;

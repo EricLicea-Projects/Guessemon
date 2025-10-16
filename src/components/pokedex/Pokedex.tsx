@@ -33,16 +33,13 @@ const Pokedex = () => {
           _hover={{ background: "transparent" }}
           _active={{ background: "transparent" }}
           _focusVisible={{ boxShadow: "outline" }}
-          sx={{ WebkitTapHighlightColor: "transparent" }}
           icon={
             <Image
               src={pokedexImg}
-              alt=""
               aria-hidden="true"
               boxSize="95px"
               objectFit="contain"
               draggable="false"
-              sx={prefersReducedMotion ? undefined : IMAGE_PRESS_MOTION}
             />
           }
         />
@@ -51,9 +48,7 @@ const Pokedex = () => {
         <PopoverContent layerStyle="pokeBallFrame">
           <PopoverArrow bg="black" />
           <PopoverBody>
-            <Text color="custom.text" fontSize="xs">
-              {data ? data.flavor_text : "Loading..."}
-            </Text>
+            <Text fontSize="xs">{data ? data.flavor_text : "Loading..."}</Text>
           </PopoverBody>
           <PopoverFooter borderTop="3px dotted silver">
             <HStack justify="space-between">

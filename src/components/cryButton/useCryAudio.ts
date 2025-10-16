@@ -47,10 +47,10 @@ const useCryAudio = (cryId: number, volume: number = 1) => {
 
     try {
       a.currentTime = 0;
-      setIsPlaying(true); // set immediately to block double-click
-      await a.play(); // resolves on user gesture; events keep state in sync
+      setIsPlaying(true);
+      await a.play();
     } catch {
-      setIsPlaying(false); // failed to play (policy, etc.)
+      setIsPlaying(false);
     }
   }, [isPlaying]);
 
