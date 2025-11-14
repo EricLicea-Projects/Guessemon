@@ -11,17 +11,14 @@ import {
   IconButton,
   Portal,
   HStack,
-  usePrefersReducedMotion,
 } from "@chakra-ui/react";
 
 import pokedexImg from "@/assets/pokedex.png";
-import { IMAGE_PRESS_MOTION } from "./pokedex.styles";
 import CryButton from "../cryButton/CryButton";
 import PokedexChip from "./PokedexChip";
 
 const Pokedex = () => {
   const { data } = useGetPokeOfDay();
-  const prefersReducedMotion = usePrefersReducedMotion();
 
   return (
     <Popover placement="top">
