@@ -27,18 +27,13 @@ This project is a way for me to practice:
 
 ## ✨ Features
 
-- 🧩 Pokémon-style guessing gameplay in the browser  
-- 🔁 Randomized game rounds so each session feels different  
-- 📱 Responsive layout that works on desktop and mobile  
-- 🚀 Fast development setup with Vite hot module reloading  
-
-*(You can adjust or add more features here as you continue building the game.)*
-
+- 🧩 Guess the Pokémon of the day. 
+- 🔁 New Pokémon arrives at Midnight UTC.
+- 📱 Responsive layout that works on desktop and mobile
+- 
 ---
 
 ## 🧰 Tech Stack
 
 - **Framework:** React  
 - **Language:** TypeScript  
-- **Build Tool:** Vite  
-- **Package Manager:** npm  
