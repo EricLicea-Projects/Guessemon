@@ -1,50 +1,44 @@
-# React + TypeScript + Vite
+# Guessemon
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A Pokémon-themed web guessing game built with React, TypeScript, and Vite.
 
-Currently, two official plugins are available:
+> **Status:** In active development
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+---
 
-## Expanding the ESLint configuration
+## 🎮 Live Demo
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+👉 https://guessemon.vercel.app
 
-- Configure the top-level `parserOptions` property like this:
+---
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+## 📌 About
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+**Guessemon** is a Pokémon-inspired guessing game built as a web app.  
+You try to guess a Pokémon based on the information and feedback you get after each attempt, aiming to find the correct answer in as few guesses as possible.
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
+This project is a way for me to practice:
 
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-```
+- Modern React + TypeScript
+- Working with APIs / data
+- Front-end project structure and deployment
+
+---
+
+## ✨ Features
+
+- 🧩 Pokémon-style guessing gameplay in the browser  
+- 🔁 Randomized game rounds so each session feels different  
+- 📱 Responsive layout that works on desktop and mobile  
+- 🚀 Fast development setup with Vite hot module reloading  
+
+*(You can adjust or add more features here as you continue building the game.)*
+
+---
+
+## 🧰 Tech Stack
+
+- **Framework:** React  
+- **Language:** TypeScript  
+- **Build Tool:** Vite  
+- **Package Manager:** npm  
