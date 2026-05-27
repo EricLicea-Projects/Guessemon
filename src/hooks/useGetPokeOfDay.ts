@@ -16,7 +16,7 @@ const useGetPokeOfDay = () => {
     queryKey: ["pokemonOfTheDay"],
     queryFn: ({ signal }) =>
       apiClient
-        .get<PokeOfTheDay>("/api/v1/pokemon_of_day", { signal })
+        .get<PokeOfTheDay>("/api/guessamon/v1/pokemon_of_day", { signal })
         .then((res) => res.data),
 
     refetchOnMount: "always",
